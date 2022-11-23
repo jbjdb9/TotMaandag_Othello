@@ -1,26 +1,27 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Play {
     static Scanner input = new Scanner(System.in);
     static boolean remote;
     static boolean replay = true;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         while(replay){
             menu();
-//            if (remote){
-//                boolean connect = Connect.connect();
-//                if (!connect){
-//                    System.out.println("Connection failed. Closing program.");
-//                    break;
-//                }
-//            }
+            if (remote){
+                boolean connect = Connect.connect();
+                if (!connect){
+                    System.out.println("Connection or login failed. Closing program.");
+                    break;
+                }
+            }
             Game.loop();
             replay();
         }
     }
 
     public static void menu() {
-        System.out.println("How would you like to play?\n============================\n1 - Local Human vs Human\n2 - Local Human vs AI\n3 - Local AI vs AI\n4 - Remote as AI\n5 - Remote as Human");
+        System.out.println("How would you like to play?\n============================\n1 - Local Human vs Human\n2 - Local Human vs AI\n3 - Local AI vs AI\n4 - Remote as AI\n");
         String result = input.nextLine();
         switch (result){
             case "1" -> {
@@ -43,14 +44,7 @@ public class Play {
                 Game.playerOne = 1;
                 Game.playerTwo = 2;
             }
-            case "5" -> {
-                remote = true;
-                Game.playerOne = 0;
-                Game.playerTwo = 2;
-            }
-            default -> {
-                menu();
-            }
+            default -> menu();
         }
     }
 
@@ -67,9 +61,7 @@ public class Play {
                 replay = false;
                 System.out.println("Thank you for playing! See you next time!");
             }
-            default -> {
-                replay();
-            }
+            default -> replay();
         }
     }
 }

@@ -23,7 +23,6 @@ public class Game {
                     switch(playerOne){
                         case 0 -> Human.move();
                         case 1 -> AI.move();
-                        case 2 -> Remote.move();
                     }
                 } else {
                     System.out.println("Player Two is up!");
@@ -51,7 +50,6 @@ public class Game {
             }
     }
     public static void welcome(int ins) {
-        // Tell the user who is controlling the players !!!!!!!!!
         if (ins == 2) {
             System.out.println("Player One starts");
             switch(playerOne){

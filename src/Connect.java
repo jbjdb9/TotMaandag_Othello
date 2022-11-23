@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class Connect {
-
+    public static String username = "TotMaandag";
     public static boolean connect() throws IOException {
         Socket connection;
         try {
@@ -16,12 +16,10 @@ public class Connect {
         }
         PrintWriter out = new PrintWriter(connection.getOutputStream(), true);
         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        System.out.println(login(out, in));
-        return true;
+        return login(out, in);
     }
-
         private static boolean login (PrintWriter out, BufferedReader in){
-            out.println("login " + "itv2ag1"); // naam moet gelijk zijn met naam bij if statement in handleNotInGame in Remote
+            out.println("login " + username);
             String response;
             try {
                 response = in.readLine();

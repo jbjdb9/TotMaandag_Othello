@@ -91,7 +91,7 @@ public class Remote{
         //Model.player = 0;
         //}
 
-        else if (responseParts != null && responseParts[0].contains("MOVE") && !info.contains("itv2ag1")) {
+        else if (responseParts != null && responseParts[0].contains("MOVE") && !info.contains(Connect.username)) {
             //Model.player = 0; ---- zelfde als voorgaande
             int zet = info.lastIndexOf("MOVE: " + 2);
             //Model.updateBoard(Integer.parseInt(info.substring(zet))); ---- zet de move van tegenstander in het board, hangt af van benaming rest code
