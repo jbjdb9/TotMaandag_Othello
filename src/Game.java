@@ -7,7 +7,6 @@ public class Game {
     static boolean gameWin;
 
     static public void loop() {
-        while (Play.replay) {
             Random rng = new Random();
             turn = rng.nextInt(3) + 1;
             Board.print();
@@ -15,10 +14,24 @@ public class Game {
             while (!gameWin) {
                 if (turn == 2) {
                     turn = 1;
-                    //playerMove();
                 } else if (turn == 1) {
                     turn = 2;
-                    //ai.aiMove();
+                }
+
+                if (turn == 1){
+                    System.out.println("Player One is up!");
+                    switch(playerOne){
+                        case 0 -> Human.move();
+                        case 1 -> AI.move();
+                        case 2 -> Remote.move();
+                    }
+                } else {
+                    System.out.println("Player Two is up!");
+                    switch(playerTwo){
+                        case 0 -> Human.move();
+                        case 1 -> AI.move();
+                        case 2 -> Remote.move();
+                    }
                 }
                 Board.print();
 
@@ -36,15 +49,23 @@ public class Game {
                     break;
                 }
             }
-        }
     }
-
     public static void welcome(int ins) {
         // Tell the user who is controlling the players !!!!!!!!!
-        if (ins == 1) {
+        if (ins == 2) {
             System.out.println("Player One starts");
-        } else if (ins == 2) {
+            switch(playerOne){
+                case 0 -> System.out.println("They're controlled by a human");
+                case 1 -> System.out.println("They're controlled by AI");
+                case 2 -> System.out.println("They're controlled remotely");
+            }
+        } else if (ins == 1) {
             System.out.println("Player Two starts!");
+            switch(playerTwo){
+                case 0 -> System.out.println("They're controlled by a human");
+                case 1 -> System.out.println("They're controlled by AI");
+                case 2 -> System.out.println("They're controlled remotely");
+            }
         }
     }
     public static void winner(int won) {

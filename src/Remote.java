@@ -1,7 +1,9 @@
 import java.io.PrintWriter;
 
-public class Remote {
-
+public class Remote extends Player{
+    public int move(){
+        return 0;
+    }
 
 
 
