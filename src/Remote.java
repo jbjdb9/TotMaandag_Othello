@@ -2,12 +2,19 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.Scanner;
+
 
 public class Remote{
     public static void move(){
 
     }
-
+//static Scanner input = new Scanner(System.in);
+//static boolean gameWin = false;
+//static boolean playAgain = true;
+//static boolean remote = false;
+//static boolean inGame = false;
+//static boolean gameEnded = false;
 //            if (connection != null) {
 //        PrintWriter out = new PrintWriter(connection.getOutputStream(), true);
 //        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
