@@ -3,43 +3,67 @@ import java.util.Scanner;
 public class Play {
     static Scanner input = new Scanner(System.in);
     static boolean remote = false;
-    static boolean replay = false;
+    static boolean replay = true;
     public static void main(String[] args) {
-        System.out.println("Welcome to Othello!");
-
+        while(replay){
+            menu();
+//            if (remote){
+//                Connect.connect();
+//            }
+            Game.loop();
+            replay();
+        }
     }
 
-    public static void remote() {
-        System.out.println("Do you want to play local or remote? [local/remote]");
+    public static void menu() {
+        System.out.println("How would you like to play?\n============================\n1 - Local Human vs Human\n2 - Local Human vs AI\n3 - Local AI vs AI\n4 - Remote as AI\n5 - Remote as Human");
         String result = input.nextLine();
-        switch (result.toLowerCase()){
-            case "remote" -> {
-                remote = true;
-            }
-            case "local" -> {
+        switch (result){
+            case "1" -> {
                 remote = false;
+                Game.playerOne = 0;
+                Game.playerTwo = 0;
+            }
+            case "2" -> {
+                remote = false;
+                Game.playerOne = 0;
+                Game.playerTwo = 1;
+            }
+            case "3" -> {
+                remote = false;
+                Game.playerOne = 1;
+                Game.playerTwo = 1;
+            }
+            case "4" -> {
+                remote = true;
+                Game.playerOne = 1;
+                Game.playerTwo = 2;
+            }
+            case "5" -> {
+                remote = true;
+                Game.playerOne = 0;
+                Game.playerTwo = 2;
             }
             default -> {
-                System.out.println("Do you want to play local or remote? [local/remote]");
-                remote();
+                menu();
             }
         }
     }
 
     public static void replay() {
+        System.out.println("Do you want to play again? [Y/N]");
         String result = input.nextLine();
         switch (result.toUpperCase()){
             case "Y" -> {
                 System.out.println("Play again!");
-                //Model.clearBoard();
-                //gameWin = false;
+                //Board.clear();
+                //Game.gameWin = false;
             }
             case "N" -> {
-                //playAgain = false;
+                replay = false;
                 System.out.println("Thank you for playing! See you next time!");
             }
             default -> {
-                System.out.println("Do you want to play again? [Y/N]");
                 replay();
             }
         }
