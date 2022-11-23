@@ -2,13 +2,17 @@ import java.util.Scanner;
 
 public class Play {
     static Scanner input = new Scanner(System.in);
-    static boolean remote = false;
+    static boolean remote;
     static boolean replay = true;
     public static void main(String[] args) {
         while(replay){
             menu();
 //            if (remote){
-//                Connect.connect();
+//                boolean connect = Connect.connect();
+//                if (!connect){
+//                    System.out.println("Connection failed. Closing program.");
+//                    break;
+//                }
 //            }
             Game.loop();
             replay();
@@ -56,8 +60,8 @@ public class Play {
         switch (result.toUpperCase()){
             case "Y" -> {
                 System.out.println("Play again!");
-                //Board.clear();
-                //Game.gameWin = false;
+                Board.clear();
+                Game.gameWin = false;
             }
             case "N" -> {
                 replay = false;
