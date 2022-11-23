@@ -7,8 +7,14 @@ import java.util.Scanner;
 
 public class Remote{
     public static void move(){
-
+        // catch the remote player's move
+        // update the board
     }
+    public static void aiMoved(int move){
+        // send the move our ai made to the server
+    }
+
+
 //static Scanner input = new Scanner(System.in);
 //static boolean gameWin = false;
 //static boolean playAgain = true;
@@ -66,7 +72,7 @@ public class Remote{
         if (responseParts != null && responseParts[0].contains("MATCH") && info.contains("Othello")) {
             //inGame = true; ---- inGame functie moet eerst gemaakt worden
             // naam van ons team, moet gelijk zijn aan inlognaam
-            if (info.contains("itv2ag1")) {
+            if (info.contains(Connect.username)) {
                 //Model.player = 0; ---- oude lijn vanuit tic-tac-toe. zet wie aan de beurt is onze ai of tegenstander (human)
 
             }
