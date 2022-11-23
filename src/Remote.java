@@ -3,9 +3,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
-public class Remote extends Player{
-    public int move(){
-        return 0;
+public class Remote{
+    public static void move(){
+
     }
 
 //            if (connection != null) {

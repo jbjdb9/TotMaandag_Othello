@@ -1,5 +1,5 @@
-public class AI extends Player{
-    public int move(){
-        return 0;
+public class AI{
+    public static void move(){
+
     }
 }

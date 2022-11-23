@@ -1,5 +1,5 @@
-public class Human extends Player{
-    public int move(){
-        return 0;
+public class Human{
+    static public void move(){
+
     }
 }
