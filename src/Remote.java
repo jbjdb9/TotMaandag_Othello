@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 public class Remote extends Player{
@@ -5,6 +8,50 @@ public class Remote extends Player{
         return 0;
     }
 
+//            if (connection != null) {
+//        PrintWriter out = new PrintWriter(connection.getOutputStream(), true);
+//        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+//        System.out.println(login(out, in));
+        // alles hierna, naar remote of weg
+//        String response = null;
+//        while (true) {
+//            try {
+//                response = in.readLine();
+//            } catch (IOException e) {
+                // Something fishy happened, ignore
+//            }
+//            if (response == null) {
+                // Nothing yet, sleep 0.2 sec and continue
+//                try {
+//                    Thread.sleep(200);
+//                } catch (InterruptedException e) {
+                    // Sleep interrupted, ignore
+//                }
+//                continue;
+//            }
+            // GAME LOOP MOET NAAR REMOTE (WAT HIERONDER STAAT)
+            // We got a response! Parse and handle
+//            String[] responseParts = response.split(" ");
+//            String info = "";
+//            if (response.contains("{")) {
+//                info = response.substring(response.indexOf("{"));
+//            }
+
+            // Deal with the response appropriately
+//            if (!inGame) {
+                // Game not started yet
+//                Remote.handleNotInGame(responseParts, info);
+//            } else {
+                // Already in a game
+//                gameEnded = Remote.handleInGame(responseParts, info, out);
+//            }
+//            if (gameEnded) {
+              // Game on for the next round!
+//                inGame = false;
+//                gameEnded = false;
+//            }
+//        }
+//    }
 
 
     public static void handleNotInGame(String[] responseParts, String info) {
@@ -46,3 +93,5 @@ public class Remote extends Player{
 
     }
 }
+
+
