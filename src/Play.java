@@ -36,7 +36,7 @@ public class Play {
         }
     }
     public static void menu() {
-        System.out.println("How would you like to play?\n============================\n1 - Local Human vs Human\n2 - Local Human vs AI\n3 - Local AI vs AI\n4 - Remote as AI");
+        System.out.println("How would you like to play?\n=================================\n1 - Local Human vs Human\n2 - Local Human vs AI\n3 - Local AI vs AI\n4 - Remote as AI");
         String result = input.nextLine();
         switch (result){
             case "1" -> {
@@ -63,7 +63,7 @@ public class Play {
         }
     }
     public static void chooseGame() {
-        System.out.println("What game would you like to play?\n============================\n1 - Tic-Tac-Toe\n2 - Othello");
+        System.out.println("What game would you like to play?\n=================================\n1 - Tic-Tac-Toe\n2 - Othello");
         String result = input.nextLine();
         switch (result){
             case "1" -> game = 0;
