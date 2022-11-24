@@ -1,9 +1,9 @@
-public class AI{
+public class TcAI {
     public static void move(){
         int move = 1;
         if (Play.remote){
             Remote.aiMoved(move);
         }
-        Board.update(move);
+        TcBoard.update(move);
     }
 }

@@ -16,7 +16,7 @@ public class Play {
                     break;
                 }
             }
-            Game.loop();
+            TcGame.loop();
             replay();
         }
     }
@@ -27,23 +27,23 @@ public class Play {
         switch (result){
             case "1" -> {
                 remote = false;
-                Game.playerOne = 0;
-                Game.playerTwo = 0;
+                TcGame.playerOne = 0;
+                TcGame.playerTwo = 0;
             }
             case "2" -> {
                 remote = false;
-                Game.playerOne = 0;
-                Game.playerTwo = 1;
+                TcGame.playerOne = 0;
+                TcGame.playerTwo = 1;
             }
             case "3" -> {
                 remote = false;
-                Game.playerOne = 1;
-                Game.playerTwo = 1;
+                TcGame.playerOne = 1;
+                TcGame.playerTwo = 1;
             }
             case "4" -> {
                 remote = true;
-                Game.playerOne = 1;
-                Game.playerTwo = 2;
+                TcGame.playerOne = 1;
+                TcGame.playerTwo = 2;
             }
             default -> menu();
         }
@@ -54,8 +54,8 @@ public class Play {
         switch (result.toUpperCase()){
             case "Y" -> {
                 System.out.println("Play again!");
-                Board.clear();
-                Game.gameWin = false;
+                TcBoard.clear();
+                TcGame.gameWin = false;
             }
             case "N" -> {
                 replay = false;

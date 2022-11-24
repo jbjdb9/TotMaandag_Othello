@@ -1,4 +1,4 @@
-public class Board {
+public class TcBoard {
     static int[] board;
     public static void clear(){
     }

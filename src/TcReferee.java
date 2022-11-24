@@ -1,4 +1,4 @@
-public class Referee {
+public class TcReferee {
     public static boolean win(int[] board){
         return true;
     }
