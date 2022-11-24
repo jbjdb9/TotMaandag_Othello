@@ -5,6 +5,7 @@ public class Play {
     static Scanner input = new Scanner(System.in);
     static boolean remote;
     static boolean replay = true;
+    static int game; // 0 = Tic-Tac-Toe, 1 = Othello
     public static void main(String[] args) throws IOException {
         while(replay){
             menu();

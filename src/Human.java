@@ -1,12 +1,19 @@
 public class Human{
-    static public void move(){
+    static public int move(){
         System.out.println("What is your move?: ");
         int move = Play.input.nextInt();
 
-        while (!TcReferee.validMove(move)) {
-            System.out.println("Invalid move. Please try again.");
-            move = Play.input.nextInt();
+        if (Play.game == 0){
+            while (!TcReferee.validMove(move)) {
+                System.out.println("Invalid move. Please try again.");
+                move = Play.input.nextInt();
+            }
+        } else {
+            while (!OthelloReferee.validMove(move)) {
+                System.out.println("Invalid move. Please try again.");
+                move = Play.input.nextInt();
+            }
         }
-        TcBoard.update(move);
+        return move;
     }
 }

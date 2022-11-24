@@ -21,20 +21,22 @@ public class TcGame {
             }
 
             // Correct player makes a move
+            int move = 1;
             if (turn == 1) {
                 System.out.println("Player One is up!");
                 switch (playerOne) {
-                    case 0 -> Human.move();
-                    case 1 -> TcAI.move();
+                    case 0 -> move = Human.move();
+                    case 1 -> move = TcAI.move();
                 }
             } else {
                 System.out.println("Player Two is up!");
                 switch (playerTwo) {
-                    case 0 -> Human.move();
-                    case 1 -> TcAI.move();
-                    case 2 -> Remote.move();
+                    case 0 -> move = Human.move();
+                    case 1 -> move = TcAI.move();
+                    case 2 -> move = Remote.move();
                 }
             }
+            TcBoard.update(move);
 
             // Print the board
             TcBoard.print();
