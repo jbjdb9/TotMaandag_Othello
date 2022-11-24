@@ -1,8 +1,8 @@
 import java.util.Random;
 
 public class OthelloGame {
-    static int playerOne;
-    static int playerTwo;
+    static int[] playerOne = {1, 0, 32};
+    static int[] playerTwo = {2, 0, 32};
     static int turn;
     static boolean gameWin;
 
@@ -13,19 +13,19 @@ public class OthelloGame {
         // Print the board
         TcBoard.print();
         // Welcome the players, notify them who starts and who is playing as what.
-        Announcer.welcome(turn, playerOne, playerTwo);
+        Announcer.welcome(turn, playerOne[0], playerTwo[0]);
         while (!gameWin) {
             // Correct player makes a move
             int move = 1;
             if (turn == 1) {
                 System.out.println("Player One is up!");
-                switch (playerOne) {
+                switch (playerOne[0]) {
                     case 0 -> move = Human.move();
                     case 1 -> move = TcAI.move();
                 }
             } else {
                 System.out.println("Player Two is up!");
-                switch (playerTwo) {
+                switch (playerTwo[0]) {
                     case 0 -> move = Human.move();
                     case 1 -> move = TcAI.move();
                     case 2 -> move = Remote.move();
