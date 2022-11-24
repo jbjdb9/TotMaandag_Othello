@@ -19,7 +19,20 @@ public class Remote{
         // WAIT for the server to request a move (handleInGame)
         // send the move our AI made to the server
     }
-    public static void match(){
+    public static void match(String[] responseParts, String info){
+        boolean matched = false;
+        while (!matched) {
+            if (responseParts != null && responseParts[0].contains("MATCH") && info.contains("TicTacToe")) {
+                inGame = true;
+                Play.game = 0;
+                matched = true;
+            } else if (responseParts != null && responseParts[0].contains("MATCH") && info.contains("Othello")) {
+                inGame = true;
+                Play.game = 1;
+                matched = true;
+            }
+        }
+
         // WAIT for the sever to match you against another player (handleNotInGame)
         // Set inGame = true;
     }
