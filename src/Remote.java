@@ -9,9 +9,10 @@ public class Remote{
 
     // Some way to handle the server telling you the match has ended !
 
-    public static int move() throws IOException{
+    public static int move() throws IOException {
         boolean moved = false;
         String response = null;
+        int numzet = 0;
         BufferedReader in = new BufferedReader(new InputStreamReader(Connect.connection.getInputStream()));
         while (!moved) {
             try {
@@ -36,18 +37,48 @@ public class Remote{
             if (responseParts[0].contains("MOVE") && !info.contains(Connect.username)) {
                 moved = true;
                 int zet = info.lastIndexOf("MOVE: " + 2);
-                OthelloBoard.update(Integer.parseInt(info.substring(zet)));
+                numzet = (Integer.parseInt(info.substring(zet)));
             }
         }
+        return numzet;
+    }
         // WAIT for the server to present the opponent's move (handleInGame)
         // catch the remote player's move
         // update the board
-        return 1;
-    }
-    public static void aiMoved(int move){
-        // WAIT for the server to request a move (handleInGame)
-        // send the move our AI made to the server
-    }
+
+    public static void aiMoved(int move) throws IOException{
+        boolean ourmove = false;
+        String response = null;
+        BufferedReader in = new BufferedReader(new InputStreamReader(Connect.connection.getInputStream()));
+        PrintWriter out = new PrintWriter(Connect.connection.getOutputStream(), true);
+        while (!ourmove) {
+            try {
+                response = in.readLine();
+            } catch (IOException e) {
+                // Something fishy happened, ignore
+            }
+            if (response == null) {
+                // Nothing yet, sleep 0.1 sec and continue
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    // Sleep interrupted, ignore
+                }
+                continue;
+            }
+            String[] responseParts = response.split(" ");
+            String info = "";
+            if (response.contains("{")) {
+                info = response.substring(response.indexOf("{"));
+            }
+            if (responseParts[0].contains("YOURTURN")) {
+                ourmove = true;
+                out.println("move " + move);
+                // WAIT for the server to request a move (handleInGame)
+                // send the move our AI made to the server
+            }
+        }
+}
     public static void match() throws IOException {
         boolean matched = false;
         String response = null;

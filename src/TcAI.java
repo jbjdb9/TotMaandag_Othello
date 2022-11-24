@@ -1,7 +1,8 @@
+import java.io.IOException;
 import java.util.Random;
 
 public class TcAI {
-    public static int move(){
+    public static int move() throws IOException {
         int move = 0;
         if (AiWin(TcBoard.board, 'O') != 0) {
             move = AiWin(TcBoard.board, 'O');
