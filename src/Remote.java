@@ -9,10 +9,11 @@ public class Remote{
 
     // Some way to handle the server telling you the match has ended !
 
-    public static void move(){
+    public static int move(){
         // WAIT for the server to present the opponent's move (handleInGame)
         // catch the remote player's move
         // update the board
+        return 1;
     }
     public static void aiMoved(int move){
         // WAIT for the server to request a move (handleInGame)
@@ -82,11 +83,11 @@ public class Remote{
 
     public static void handleNotInGame(String[] responseParts, String info) {
         //SVR GAME MATCH {PLAYERTOMOVE: "<naam speler1>", GAMETYPE: "<speltype>", OPPONENT: "<naam tegenstander>"}
+        if (responseParts != null && responseParts[0].contains("MATCH") && info.contains("TicTacToe")) {
+            inGame = true; //---- inGame functie moet eerst gemaakt worden
+            //
         if (responseParts != null && responseParts[0].contains("MATCH") && info.contains("Othello")) {
-            //inGame = true; ---- inGame functie moet eerst gemaakt worden
-            // naam van ons team, moet gelijk zijn aan inlognaam
-            if (info.contains(Connect.username)) {
-                //Model.player = 0; ---- oude lijn vanuit tic-tac-toe. zet wie aan de beurt is onze ai of tegenstander (human)
+
 
             }
             else {
