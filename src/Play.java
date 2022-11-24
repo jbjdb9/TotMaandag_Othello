@@ -21,7 +21,7 @@ public class Play {
     }
 
     public static void menu() {
-        System.out.println("How would you like to play?\n============================\n1 - Local Human vs Human\n2 - Local Human vs AI\n3 - Local AI vs AI\n4 - Remote as AI\n");
+        System.out.println("How would you like to play?\n============================\n1 - Local Human vs Human\n2 - Local Human vs AI\n3 - Local AI vs AI\n4 - Remote as AI");
         String result = input.nextLine();
         switch (result){
             case "1" -> {
@@ -49,7 +49,6 @@ public class Play {
     }
 
     public static void replay() {
-        System.out.println("Do you want to play again? [Y/N]");
         String result = input.nextLine();
         switch (result.toUpperCase()){
             case "Y" -> {
@@ -61,7 +60,10 @@ public class Play {
                 replay = false;
                 System.out.println("Thank you for playing! See you next time!");
             }
-            default -> replay();
+            default -> {
+                System.out.println("Do you want to play again? [Y/N]");
+                replay();
+            }
         }
     }
 }

@@ -8,7 +8,7 @@ public class Game {
 
     static public void loop() {
             Random rng = new Random();
-            turn = rng.nextInt(3) + 1;
+            turn = rng.nextInt(1,3);
             Board.print();
             welcome(turn);
             while (!gameWin) {
@@ -49,15 +49,15 @@ public class Game {
                 }
             }
     }
-    public static void welcome(int ins) {
-        if (ins == 2) {
+    public static void welcome(int turn) {
+        if (turn == 2) {
             System.out.println("Player One starts");
             switch(playerOne){
                 case 0 -> System.out.println("They're controlled by a human");
                 case 1 -> System.out.println("They're controlled by AI");
                 case 2 -> System.out.println("They're controlled remotely");
             }
-        } else if (ins == 1) {
+        } else if (turn == 1) {
             System.out.println("Player Two starts!");
             switch(playerTwo){
                 case 0 -> System.out.println("They're controlled by a human");
