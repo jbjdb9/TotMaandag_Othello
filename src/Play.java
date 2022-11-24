@@ -8,6 +8,7 @@ public class Play {
     public static void main(String[] args) throws IOException {
         while(replay){
             menu();
+            // Connect if playing with a remote player
             if (remote){
                 boolean connect = Connect.connect();
                 if (!connect){

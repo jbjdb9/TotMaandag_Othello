@@ -4,15 +4,28 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-
 public class Remote{
+    static boolean inGame = false;
+
+    // Some way to handle the server telling you the match has ended !
+
     public static void move(){
+        // WAIT for the server to present the opponent's move (handleInGame)
         // catch the remote player's move
         // update the board
     }
     public static void aiMoved(int move){
-        // send the move our ai made to the server
+        // WAIT for the server to request a move (handleInGame)
+        // send the move our AI made to the server
     }
+    public static void match(){
+        // WAIT for the sever to match you against another player (handleNotInGame)
+        // Set inGame = true;
+    }
+
+
+
+
 
 
 //static Scanner input = new Scanner(System.in);
