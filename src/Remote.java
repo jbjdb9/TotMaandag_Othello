@@ -19,79 +19,43 @@ public class Remote{
         // WAIT for the server to request a move (handleInGame)
         // send the move our AI made to the server
     }
-    public static void match(String[] responseParts, String info){
+    public static void match() throws IOException {
         boolean matched = false;
+        String response = null;
+        BufferedReader in = new BufferedReader(new InputStreamReader(Connect.connection.getInputStream()));
         while (!matched) {
-            if (responseParts != null && responseParts[0].contains("MATCH") && info.contains("TicTacToe")) {
+            try {
+                response = in.readLine();
+            } catch (IOException e) {
+                // Something fishy happened, ignore
+            }
+            if (response == null) {
+                // Nothing yet, sleep 0.1 sec and continue
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    // Sleep interrupted, ignore
+                }
+                continue;
+            }
+            // We got a response! Parse and handle
+            String[] responseParts = response.split(" ");
+            String info = "";
+            if (response.contains("{")) {
+                info = response.substring(response.indexOf("{"));
+            }
+            if (responseParts[0].contains("MATCH") && info.contains("TicTacToe")) {
                 inGame = true;
                 Play.game = 0;
                 matched = true;
-            } else if (responseParts != null && responseParts[0].contains("MATCH") && info.contains("Othello")) {
+            } else if (responseParts[0].contains("MATCH") && info.contains("Othello")) {
                 inGame = true;
                 Play.game = 1;
                 matched = true;
             }
         }
-
-        // WAIT for the sever to match you against another player (handleNotInGame)
-        // Set inGame = true;
     }
 
-
-
-
-
-
-//static Scanner input = new Scanner(System.in);
-//static boolean gameWin = false;
-//static boolean playAgain = true;
-//static boolean remote = false;
-//static boolean inGame = false;
-//static boolean gameEnded = false;
-//            if (connection != null) {
-//        PrintWriter out = new PrintWriter(connection.getOutputStream(), true);
-//        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-//        System.out.println(login(out, in));
-        // alles hierna, naar remote of weg
-//        String response = null;
-//        while (true) {
-//            try {
-//                response = in.readLine();
-//            } catch (IOException e) {
-                // Something fishy happened, ignore
-//            }
-//            if (response == null) {
-                // Nothing yet, sleep 0.2 sec and continue
-//                try {
-//                    Thread.sleep(200);
-//                } catch (InterruptedException e) {
-                    // Sleep interrupted, ignore
-//                }
-//                continue;
-//            }
-            // GAME LOOP MOET NAAR REMOTE (WAT HIERONDER STAAT)
-            // We got a response! Parse and handle
-//            String[] responseParts = response.split(" ");
-//            String info = "";
-//            if (response.contains("{")) {
-//                info = response.substring(response.indexOf("{"));
-//            }
-
-            // Deal with the response appropriately
-//            if (!inGame) {
-                // Game not started yet
-//                Remote.handleNotInGame(responseParts, info);
-//            } else {
-                // Already in a game
-//                gameEnded = Remote.handleInGame(responseParts, info, out);
-//            }
-//            if (gameEnded) {
-              // Game on for the next round!
-//                inGame = false;
-//                gameEnded = false;
-//            }
-//        }
-//    }
 
 
     public static void handleNotInGame(String[] responseParts, String info) {
