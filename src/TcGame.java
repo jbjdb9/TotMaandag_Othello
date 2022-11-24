@@ -15,11 +15,6 @@ public class TcGame {
         // Welcome the players, notify them who starts and who is playing as what.
         Announcer.welcome(turn, playerOne, playerTwo);
         while (!gameWin) {
-            // Match with an opponent if we are playing remote and are not in game.
-            if (Play.remote && !Remote.inGame) {
-                Remote.match();
-            }
-
             // Correct player makes a move
             int move = 1;
             if (turn == 1) {

@@ -6,6 +6,7 @@ import java.net.Socket;
 
 public class Connect {
     public static String username = "TotMaandag";
+    public static boolean connected = false;
     public static boolean connect() throws IOException {
         Socket connection;
         try {
@@ -33,6 +34,7 @@ public class Connect {
             } else {
                 out.println("Login successful");
             }
+            connected = true;
             return true;
         }
     }

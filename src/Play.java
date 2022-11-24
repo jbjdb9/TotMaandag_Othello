@@ -9,19 +9,32 @@ public class Play {
     public static void main(String[] args) throws IOException {
         while(replay){
             menu();
-            // Connect if playing with a remote player
             if (remote){
-                boolean connect = Connect.connect();
-                if (!connect){
-                    System.out.println("Connection or login failed. Closing program.");
-                    break;
+                // Connect if playing remote, but not yet connected
+                if (!Connect.connected){
+                    boolean connect = Connect.connect();
+                    if (!connect){
+                        System.out.println("Connection or login failed. Closing program.");
+                        break;
                 }
+                    // Be ready for a new match
+                    Remote.match();
+                }
+            } else {
+                chooseGame();
             }
-            TcGame.loop();
-            replay();
+
+            if (game == 0){
+                TcGame.loop();
+            } else {
+                OthelloGame.loop();
+            }
+
+            if (!remote){
+                replay();
+            }
         }
     }
-
     public static void menu() {
         System.out.println("How would you like to play?\n============================\n1 - Local Human vs Human\n2 - Local Human vs AI\n3 - Local AI vs AI\n4 - Remote as AI");
         String result = input.nextLine();
@@ -49,7 +62,15 @@ public class Play {
             default -> menu();
         }
     }
-
+    public static void chooseGame() {
+        System.out.println("What game would you like to play?\n============================\n1 - Tic-Tac-Toe\n2 - Othello");
+        String result = input.nextLine();
+        switch (result){
+            case "1" -> game = 0;
+            case "2" -> game = 1;
+            default -> chooseGame();
+        }
+    }
     public static void replay() {
         String result = input.nextLine();
         switch (result.toUpperCase()){
