@@ -5,10 +5,10 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class Connect {
+    public static Socket connection;
     public static String username = "TotMaandag";
     public static boolean connected = false;
     public static boolean connect() throws IOException {
-        Socket connection;
         try {
             connection = new Socket("localhost", 7789);
         } catch (IOException e) {
@@ -36,5 +36,6 @@ public class Connect {
             }
             connected = true;
             return true;
+
         }
     }
