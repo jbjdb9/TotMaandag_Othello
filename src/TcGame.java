@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Random;
 
 public class TcGame {
@@ -6,7 +7,7 @@ public class TcGame {
     static int turn;
     static boolean gameWin;
 
-    static public void loop() {
+    static public void loop() throws IOException {
         // Set the turn
         Random rng = new Random();
         turn = rng.nextInt(1, 3);

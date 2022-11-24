@@ -9,7 +9,36 @@ public class Remote{
 
     // Some way to handle the server telling you the match has ended !
 
-    public static int move(){
+    public static int move() throws IOException{
+        boolean moved = false;
+        String response = null;
+        BufferedReader in = new BufferedReader(new InputStreamReader(Connect.connection.getInputStream()));
+        while (!moved) {
+            try {
+                response = in.readLine();
+            } catch (IOException e) {
+                // Something fishy happened, ignore
+            }
+            if (response == null) {
+                // Nothing yet, sleep 0.1 sec and continue
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    // Sleep interrupted, ignore
+                }
+                continue;
+            }
+            String[] responseParts = response.split(" ");
+            String info = "";
+            if (response.contains("{")) {
+                info = response.substring(response.indexOf("{"));
+            }
+            if (responseParts[0].contains("MOVE") && !info.contains(Connect.username)) {
+                moved = true;
+                int zet = info.lastIndexOf("MOVE: " + 2);
+                OthelloBoard.update(Integer.parseInt(info.substring(zet)));
+            }
+        }
         // WAIT for the server to present the opponent's move (handleInGame)
         // catch the remote player's move
         // update the board
@@ -38,7 +67,6 @@ public class Remote{
                 }
                 continue;
             }
-            // We got a response! Parse and handle
             String[] responseParts = response.split(" ");
             String info = "";
             if (response.contains("{")) {
