@@ -32,10 +32,10 @@ public class OthelloGame {
                     case 2 -> move = Remote.move();
                 }
             }
-            TcBoard.update(move);
+            OthelloBoard.update(move);
 
             // Print the board
-            TcBoard.print();
+            OthelloBoard.print();
 
             // End the game
             gameWin = TcReferee.win(TcBoard.board);
