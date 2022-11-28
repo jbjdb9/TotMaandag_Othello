@@ -18,7 +18,7 @@ public class Play {
                         break;
                 }
                     // Be ready for a new match
-                    Remote.match();
+                    Remote.subscribe();
                 }
             } else {
                 chooseGame();
