@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class Remote{
     static boolean inGame = false;
+    static Scanner input = new Scanner(System.in);
 
     // Some way to handle the server telling you the match has ended !
 
@@ -82,7 +83,22 @@ public class Remote{
         String response = null;
         BufferedReader in = new BufferedReader(new InputStreamReader(Connect.connection.getInputStream()));
         PrintWriter out = new PrintWriter(Connect.connection.getOutputStream(), true);
-        out.println("subscribe");
+        System.out.println("what would you like to play?\n=================================\n1 - TicTacToe\n2 - Othello");
+        String game = input.nextLine();
+        if (game.equals("1")){
+            out.println("subscribe tictactoe");
+        } else if (game.equals("2")) {
+            out.println("subscribe othello");
+        }
+        //switch (game){
+        //    case "1" -> {
+        //        out.println("subscribe <TicTacToe>");
+        //    }
+        //    case "2" -> {
+        //        out.println("subscribe <Othello>");
+        //
+        //    }
+        //}
         while (!ok) {
             try {
                 response = in.readLine();
