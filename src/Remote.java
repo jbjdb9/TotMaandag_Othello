@@ -86,7 +86,7 @@ public class Remote{
         System.out.println("what would you like to play?\n=================================\n1 - TicTacToe\n2 - Othello");
         String game = input.nextLine();
         if (game.equals("1")){
-            out.println("subscribe tictactoe");
+            out.println("subscribe tic-tac-toe");
         } else if (game.equals("2")) {
             out.println("subscribe othello");
         }
