@@ -48,8 +48,10 @@ public class OthelloBoard {
     public static void update(int[] move){
         if(OthelloGame.turn == 1){
             board[move[0]][move[1]] = OthelloGame.playerOne[1];
+            // call flip()
         } else {
             board[move[0]][move[1]] = OthelloGame.playerTwo[1];
+            // call flip()
         }
     }
     public static boolean flip(int[] move){
