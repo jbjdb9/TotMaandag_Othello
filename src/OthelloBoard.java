@@ -33,12 +33,12 @@ public class OthelloBoard {
             for(;column < 8;column++){
                 if(board[row][column] != 0){
                     if(board[row][column] == 1){
-                        System.out.print("●|");
+                        System.out.print("⚫|");
                     } else{
-                        System.out.print("○|");
+                        System.out.print("⚪|");
                     }
                 } else{
-                    System.out.print(" |");
+                    System.out.print("\uD83D\uDFE9|");
                 }
             }
         }
@@ -48,9 +48,11 @@ public class OthelloBoard {
     public static void update(int[] move){
         if(OthelloGame.turn == 1){
             board[move[0]][move[1]] = OthelloGame.playerOne[1];
+            OthelloCalculator.OthelloCalculator(move, OthelloGame.playerOne[1]);
             // call flip()
         } else {
             board[move[0]][move[1]] = OthelloGame.playerTwo[1];
+            OthelloCalculator.OthelloCalculator(move, OthelloGame.playerTwo[1]);
             // call flip()
         }
     }
