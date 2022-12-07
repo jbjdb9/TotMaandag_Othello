@@ -24,7 +24,7 @@ public class OthelloBoard {
     }
     public static void print(){
         // Code for an underline
-        System.out.print("  \u0332A \u0332B \u0332C \u0332D \u0332E \u0332F \u0332G \u0332H");
+        System.out.print(" \u200E\u200E\u200E|\u200E\u200E\u200E\uD835\uDCD0 |\u200E\u200E\u200E\uD835\uDCD1 |\u200E\u200E\u200E\uD835\uDCD2 |\u200E\u200E\u200E\uD835\uDCD3 |\u200E\u200E\u200E\uD835\uDCD4 |\u200E\u200E\u200E\uD835\uDCD5 |\u200E\u200E\u200E\uD835\uDCD6 |\u200E\u200E\u200E\uD835\uDCD7 |");
         // Print the board
         for(int row = 0;row < 8;row++){
             System.out.println("");
@@ -43,7 +43,7 @@ public class OthelloBoard {
             }
         }
         // Code for an over line
-        System.out.println("\n ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
+        System.out.println("\n ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
     }
     public static void update(int[] move){
         if(OthelloGame.turn == 1){
