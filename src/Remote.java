@@ -102,7 +102,7 @@ public class Remote{
         if (game.equals("1")){
             out.println("subscribe tic-tac-toe");
         } else if (game.equals("2")) {
-            out.println("subscribe othello");
+            out.println("subscribe reversi");
         }
         while (!ok) {
             try {
