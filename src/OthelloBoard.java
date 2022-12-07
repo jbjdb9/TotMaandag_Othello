@@ -33,9 +33,9 @@ public class OthelloBoard {
             for(;column < 8;column++){
                 if(board[row][column] != 0){
                     if(board[row][column] == 1){
-                        System.out.print("Z|");
+                        System.out.print("●|");
                     } else{
-                        System.out.print("W|");
+                        System.out.print("○|");
                     }
                 } else{
                     System.out.print(" |");

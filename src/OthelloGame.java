@@ -3,6 +3,7 @@ import java.util.Random;
 
 public class OthelloGame {
     // player int list exists of: {player type, player colour, player stones}
+    static int[] move = {};
     static int[] playerOne = {0, 0, 2, 30};
     static int[] playerTwo = {0, 0, 2, 30};
     static int turn;
