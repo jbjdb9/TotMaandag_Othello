@@ -4,7 +4,7 @@ public class OthelloAI {
     public static int[] move() throws IOException {
         int[] move = {0,0};
         if (Play.remote){
-            //Remote.aiMoved(move);
+            Remote.reversetranslate(move);
         }
         return move;
     }

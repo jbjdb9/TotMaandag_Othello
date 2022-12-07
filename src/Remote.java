@@ -44,6 +44,20 @@ public class Remote{
         return numzet;
     }
 
+    public static int[] translate() throws IOException {
+        int [] othellomove = {-1, -1};
+        int row = (move() / 8);
+        int col = (move() % 8);
+        othellomove[0] = col;
+        othellomove[1] = row;
+        return othellomove;
+    }
+
+    public static void reversetranslate(int[] move) throws IOException {
+        int row = (move[1] * 8);
+        int col = (move[0]);
+        aiMoved(row + col);
+    }
 
     public static void aiMoved(int move) throws IOException{
         boolean ourmove = false;

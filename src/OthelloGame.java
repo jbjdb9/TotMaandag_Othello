@@ -40,7 +40,7 @@ public class OthelloGame {
                 switch (playerTwo[0]) {
                     case 0 -> move = Human.othelloMove();
                     case 1 -> move = OthelloAI.move();
-                    //case 2 -> move = Remote.move();
+                    case 2 -> move = Remote.translate();
                 }
             }
             OthelloBoard.update(move);
