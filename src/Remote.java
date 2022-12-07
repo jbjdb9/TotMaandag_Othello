@@ -104,15 +104,6 @@ public class Remote{
         } else if (game.equals("2")) {
             out.println("subscribe othello");
         }
-        //switch (game){
-        //    case "1" -> {
-        //        out.println("subscribe <TicTacToe>");
-        //    }
-        //    case "2" -> {
-        //        out.println("subscribe <Othello>");
-        //
-        //    }
-        //}
         while (!ok) {
             try {
                 response = in.readLine();
