@@ -18,11 +18,11 @@ public class OthelloGame {
         if (turn == 1){
             playerOne[1] = 1;
             playerTwo[1] = 2;
-            System.out.println("Player One is black. Player Two is White");
+            System.out.println("Player One is Black. Player Two is White");
         } else{
             playerOne[1] = 2;
             playerTwo[1] = 1;
-            System.out.println("Player One is black. Player Two is White");
+            System.out.println("Player One is White. Player Two is Black");
         }
         // Welcome the players, notify them who starts and who is playing as what.
         Announcer.welcome(turn, playerOne[0], playerTwo[0]);
