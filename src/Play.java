@@ -8,6 +8,7 @@ public class Play {
     static int game; // 0 = Tic-Tac-Toe, 1 = Othello
     public static void main(String[] args) throws IOException {
         while(replay){
+            chooseGame();
             menu();
             if (remote){
                 // Connect if playing remote, but not yet connected
@@ -20,10 +21,7 @@ public class Play {
                     // Be ready for a new match
                     Remote.subscribe();
                 }
-            } else {
-                chooseGame();
             }
-
             if (game == 0){
                 TcGame.loop();
             } else {
@@ -41,23 +39,43 @@ public class Play {
         switch (result){
             case "1" -> {
                 remote = false;
-                TcGame.playerOne = 0;
-                TcGame.playerTwo = 0;
+                if (game == 0){
+                    TcGame.playerOne = 0;
+                    TcGame.playerTwo = 0;
+                } else{
+                    OthelloGame.playerOne[0] = 0;
+                    OthelloGame.playerTwo[0] = 0;
+                }
             }
             case "2" -> {
                 remote = false;
-                TcGame.playerOne = 0;
-                TcGame.playerTwo = 1;
+                if (game == 0){
+                    TcGame.playerOne = 0;
+                    TcGame.playerTwo = 1;
+                } else{
+                    OthelloGame.playerOne[0] = 0;
+                    OthelloGame.playerTwo[0] = 1;
+                }
             }
             case "3" -> {
                 remote = false;
-                TcGame.playerOne = 1;
-                TcGame.playerTwo = 1;
+                if (game == 0){
+                    TcGame.playerOne = 1;
+                    TcGame.playerTwo = 1;
+                } else{
+                    OthelloGame.playerOne[0] = 1;
+                    OthelloGame.playerTwo[0] = 1;
+                }
             }
             case "4" -> {
                 remote = true;
-                TcGame.playerOne = 1;
-                TcGame.playerTwo = 2;
+                if (game == 0){
+                    TcGame.playerOne = 1;
+                    TcGame.playerTwo = 2;
+                } else{
+                    OthelloGame.playerOne[0] = 1;
+                    OthelloGame.playerTwo[0] = 2;
+                }
             }
             default -> menu();
         }
@@ -77,6 +95,7 @@ public class Play {
             case "Y" -> {
                 System.out.println("Play again!");
                 TcBoard.clear();
+                OthelloBoard.clear();
                 TcGame.gameWin = false;
             }
             case "N" -> {

@@ -7,9 +7,9 @@ public class TcBoard {
         board[1][0] = '_';
         board[1][2] = '_';
         board[1][4] = '_';
-        board[2][0] = '_';
-        board[2][2] = '_';
-        board[2][4] = '_';
+        board[2][0] = ' ';
+        board[2][2] = ' ';
+        board[2][4] = ' ';
     }
     public static void print(){
         for (char[] row : board) {

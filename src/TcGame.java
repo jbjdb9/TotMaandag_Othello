@@ -21,13 +21,13 @@ public class TcGame {
             if (turn == 1) {
                 System.out.println("Player One is up!");
                 switch (playerOne) {
-                    case 0 -> move = Human.move();
+                    case 0 -> move = Human.tcMove();
                     case 1 -> move = TcAI.move();
                 }
             } else {
                 System.out.println("Player Two is up!");
                 switch (playerTwo) {
-                    case 0 -> move = Human.move();
+                    case 0 -> move = Human.tcMove();
                     case 1 -> move = TcAI.move();
                     case 2 -> move = Remote.move();
                 }
