@@ -19,38 +19,38 @@ public class OthelloReferee {
                     return false;
                 }
             }
-            else if (move[0] == 0 && move[1] == 7){ ////////////
-                if (OthelloBoard.board[move[0] + 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] - 1] != 0 || OthelloBoard.board[move[0]+1][move[1]-1] != 0){
+            else if (move[0] == 0 && move[1] == 7){
+                if (OthelloBoard.board[move[0] + 1][move[1]] == 0 && OthelloBoard.board[move[0]][move[1] - 1] == 0 && OthelloBoard.board[move[0]+1][move[1]-1] == 0){
                     return false;
                 }
             }
             else if (move[0] == 7 && move[1] == 0){
-                if (OthelloBoard.board[move[0] - 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] + 1] != 0 || OthelloBoard.board[move[0]-1][move[1]+1] != 0){
+                if (OthelloBoard.board[move[0] - 1][move[1]] == 0 && OthelloBoard.board[move[0]][move[1] + 1] == 0 && OthelloBoard.board[move[0]-1][move[1]+1] == 0){
                     return false;
                 }
             }
             else if (move[0] == 7 && move[1] == 7){
-                if (OthelloBoard.board[move[0] - 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] - 1] != 0 || OthelloBoard.board[move[0]-1][move[1]-1] != 0){
+                if (OthelloBoard.board[move[0] - 1][move[1]] == 0 && OthelloBoard.board[move[0]][move[1] - 1] == 0 && OthelloBoard.board[move[0]-1][move[1]-1] == 0){
                     return false;
                 }
             } else{
                 if (move[0] == 0){
-                    if (OthelloBoard.board[move[0]][move[1] - 1] != 0 || OthelloBoard.board[move[0] + 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] + 1] != 0 || OthelloBoard.board[move[0]+1][move[1]+1] != 0 || OthelloBoard.board[move[0]+1][move[1]-1] != 0){
+                    if (OthelloBoard.board[move[0]][move[1] - 1] == 0 && OthelloBoard.board[move[0] + 1][move[1]] == 0 && OthelloBoard.board[move[0]][move[1] + 1] == 0 && OthelloBoard.board[move[0]+1][move[1]+1] == 0 && OthelloBoard.board[move[0]+1][move[1]-1] == 0){
                         return false;
                     }
                 }
                 else if (move[0] == 7){
-                    if (OthelloBoard.board[move[0] - 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] - 1] != 0 || OthelloBoard.board[move[0]][move[1] + 1] != 0 || OthelloBoard.board[move[0]-1][move[1]+1] != 0 || OthelloBoard.board[move[0]-1][move[1]-1] != 0){
+                    if (OthelloBoard.board[move[0] - 1][move[1]] == 0 && OthelloBoard.board[move[0]][move[1] - 1] == 0 && OthelloBoard.board[move[0]][move[1] + 1] == 0 && OthelloBoard.board[move[0]-1][move[1]+1] == 0 && OthelloBoard.board[move[0]-1][move[1]-1] == 0){
                         return false;
                     }
                 }
                 else if (move[1] == 0){
-                    if (OthelloBoard.board[move[0] - 1][move[1]] != 0 || OthelloBoard.board[move[0] + 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] + 1] != 0 || OthelloBoard.board[move[0]+1][move[1]+1] != 0 || OthelloBoard.board[move[0]-1][move[1]+1] != 0){
+                    if (OthelloBoard.board[move[0] - 1][move[1]] == 0 && OthelloBoard.board[move[0] + 1][move[1]] == 0 && OthelloBoard.board[move[0]][move[1] + 1] == 0 && OthelloBoard.board[move[0]+1][move[1]+1] == 0 && OthelloBoard.board[move[0]-1][move[1]+1] == 0){
                         return false;
                     }
                 }
                 else {
-                    if (OthelloBoard.board[move[0] - 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] - 1] != 0 || OthelloBoard.board[move[0] + 1][move[1]] != 0 || OthelloBoard.board[move[0]+1][move[1]-1] != 0 || OthelloBoard.board[move[0]-1][move[1]-1] != 0){
+                    if (OthelloBoard.board[move[0] - 1][move[1]] == 0 && OthelloBoard.board[move[0]][move[1] - 1] == 0 && OthelloBoard.board[move[0] + 1][move[1]] == 0 && OthelloBoard.board[move[0]+1][move[1]-1] == 0 && OthelloBoard.board[move[0]-1][move[1]-1] == 0){
                         return false;
                     }
                 }
