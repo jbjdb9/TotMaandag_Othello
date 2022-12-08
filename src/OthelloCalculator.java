@@ -27,7 +27,7 @@ public class OthelloCalculator {
     public static void northeast(int[]move, int color){
         int place_x = move[1];
         int place_y = move[0];
-        while(place_y != 0 || place_x != 7){
+        while(place_y != 0 && place_x != 7){
             if(color == OthelloBoard.board[place_y-1][place_x+1]|| OthelloBoard.board[place_y-1][place_x+1] == 0){
                 break;
             }
@@ -53,7 +53,7 @@ public class OthelloCalculator {
     public static void southeast(int[]move, int color){
         int place_x = move[1];
         int place_y = move[0];
-        while(place_y != 7 || place_x != 7){
+        while(place_y != 7 && place_x != 7){
             if(color == OthelloBoard.board[place_y+1][place_x+1]|| OthelloBoard.board[place_y+1][place_x+1] == 0){
                 break;
             }
@@ -79,7 +79,7 @@ public class OthelloCalculator {
     public static void southwest(int[]move, int color){
         int place_x = move[1];
         int place_y = move[0];
-        while(place_y != 7 || place_x != 0){
+        while(place_y != 7 && place_x != 0){
             if(color == OthelloBoard.board[place_y+1][place_x-1]|| OthelloBoard.board[place_y+1][place_x-1] == 0){
                 break;
             }
@@ -105,7 +105,7 @@ public class OthelloCalculator {
     public static void northwest(int[]move, int color){
         int place_x = move[1];
         int place_y = move[0];
-        while(place_y != 0 || place_x != 0){
+        while(place_y != 0 && place_x != 0){
             if(color == OthelloBoard.board[place_y-1][place_x-1]|| OthelloBoard.board[place_y-1][place_x-1] == 0){
                 break;
             }

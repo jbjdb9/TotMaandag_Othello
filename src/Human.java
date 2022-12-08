@@ -28,8 +28,8 @@ public class Human{
                     }
                     // convert char to int, and subtract 1 to convert position to index.
                     int column = input.charAt(1) - '1';
-                    move[0] = column;
-                    move[1] = row;
+                    move[0] = column; // Column is 1-8
+                    move[1] = row; // Row is A-H
                 }
             }
         }
