@@ -38,7 +38,6 @@ public class OthelloReferee {
                 }
             }
         }
-        // A way to check if stones are flipped
     }
     public static int win(){
         // Check for a tie
