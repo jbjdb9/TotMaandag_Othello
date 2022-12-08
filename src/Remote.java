@@ -13,7 +13,7 @@ public class Remote{
     public static int move() throws IOException {
         boolean moved = false;
         String response = null;
-        int numzet = 0;
+        int move = 0;
         BufferedReader in = new BufferedReader(new InputStreamReader(Connect.connection.getInputStream()));
         while (!moved) {
             try {
@@ -38,33 +38,33 @@ public class Remote{
             if (responseParts[0].contains("MOVE") && !info.contains(Connect.username)) {
                 moved = true;
                 int zet = info.lastIndexOf("MOVE: " + 2);
-                numzet = (Integer.parseInt(info.substring(zet)));
+                move = (Integer.parseInt(info.substring(zet)));
             }
         }
-        return numzet;
+        return move;
     }
 
     public static int[] translate() throws IOException {
-        int [] othellomove = {-1, -1};
+        int [] move = {-1, -1};
         int row = (move() / 8);
         int col = (move() % 8);
-        othellomove[0] = col;
-        othellomove[1] = row;
-        return othellomove;
+        move[0] = col;
+        move[1] = row;
+        return move;
     }
 
-    public static void reversetranslate(int[] move) throws IOException {
+    public static void reverseTranslate(int[] move) throws IOException {
         int row = (move[1] * 8);
         int col = (move[0]);
         aiMoved(row + col);
     }
 
     public static void aiMoved(int move) throws IOException{
-        boolean ourmove = false;
+        boolean ourMove = false;
         String response = null;
         BufferedReader in = new BufferedReader(new InputStreamReader(Connect.connection.getInputStream()));
         PrintWriter out = new PrintWriter(Connect.connection.getOutputStream(), true);
-        while (!ourmove) {
+        while (!ourMove) {
             try {
                 response = in.readLine();
             } catch (IOException e) {
@@ -80,12 +80,8 @@ public class Remote{
                 continue;
             }
             String[] responseParts = response.split(" ");
-            String info = "";
-            if (response.contains("{")) {
-                info = response.substring(response.indexOf("{"));
-            }
             if (responseParts[0].contains("YOURTURN")) {
-                ourmove = true;
+                ourMove = true;
                 out.println("move " + move);
                 // WAIT for the server to request a move (handleInGame)
                 // send the move our AI made to the server
@@ -120,10 +116,6 @@ public class Remote{
                 continue;
             }
             String[] responseParts = response.split(" ");
-            String info = "";
-            if (response.contains("{")) {
-                info = response.substring(response.indexOf("{"));
-            }
             if (responseParts[0].contains("OK")) {
                 ok = true;
                 // wait for server to respond
@@ -160,7 +152,7 @@ public class Remote{
                 inGame = true;
                 Play.game = 0;
                 matched = true;
-            } else if (responseParts[0].contains("MATCH") && info.contains("Othello")) {
+            } else if (responseParts[0].contains("MATCH") && info.contains("Reversi")) {
                 inGame = true;
                 Play.game = 1;
                 matched = true;
