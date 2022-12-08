@@ -10,54 +10,35 @@ public class OthelloReferee {
         }
         // move has to border a stone
         if (move[0] != 0 && move[1] != 0 && move[0] != 7 && move[1] != 7){
-            if (OthelloBoard.board[move[0]-1][move[1]] == 0 && OthelloBoard.board[move[0]][move[1]-1] == 0 && OthelloBoard.board[move[0]+1][move[1]] == 0 && OthelloBoard.board[move[0]][move[1]+1] == 0) {
-                return false;
-            }
+            return OthelloBoard.board[move[0] - 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] - 1] != 0 || OthelloBoard.board[move[0] + 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] + 1] != 0;
         } else{
             if (move[0] == 0 && move[1] == 0){
-                if (OthelloBoard.board[move[0]+1][move[1]] == 0 && OthelloBoard.board[move[0]][move[1]+1] == 0){
-                    return false;
-                }
+                return OthelloBoard.board[move[0] + 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] + 1] != 0;
             }
             else if (move[0] == 0 && move[1] == 7){
-                if (OthelloBoard.board[move[0]+1][move[1]] == 0 && OthelloBoard.board[move[0]][move[1]-1] == 0){
-                    return false;
-                }
+                return OthelloBoard.board[move[0] + 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] - 1] != 0;
             }
             else if (move[0] == 7 && move[1] == 0){
-                if (OthelloBoard.board[move[0]-1][move[1]] == 0 && OthelloBoard.board[move[0]][move[1]+1] == 0){
-                    return false;
-                }
+                return OthelloBoard.board[move[0] - 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] + 1] != 0;
             }
             else if (move[0] == 7 && move[1] == 7){
-                if (OthelloBoard.board[move[0]-1][move[1]] == 0 && OthelloBoard.board[move[0]][move[1]-1] == 0){
-                    return false;
-                }
+                return OthelloBoard.board[move[0] - 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] - 1] != 0;
             } else{
                 if (move[0] == 0){
-                    if (OthelloBoard.board[move[0]][move[1]-1] == 0 && OthelloBoard.board[move[0]+1][move[1]] == 0 && OthelloBoard.board[move[0]][move[1]+1] == 0){
-                        return false;
-                    }
+                    return OthelloBoard.board[move[0]][move[1] - 1] != 0 || OthelloBoard.board[move[0] + 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] + 1] != 0;
                 }
                 else if (move[0] == 7){
-                    if (OthelloBoard.board[move[0]-1][move[1]] == 0 && OthelloBoard.board[move[0]][move[1]-1] == 0 && OthelloBoard.board[move[0]][move[1]+1] == 0){
-                        return false;
-                    }
+                    return OthelloBoard.board[move[0] - 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] - 1] != 0 || OthelloBoard.board[move[0]][move[1] + 1] != 0;
                 }
                 else if (move[1] == 0){
-                    if (OthelloBoard.board[move[0]-1][move[1]] == 0 && OthelloBoard.board[move[0]+1][move[1]] == 0 && OthelloBoard.board[move[0]][move[1]+1] == 0){
-                        return false;
-                    }
+                    return OthelloBoard.board[move[0] - 1][move[1]] != 0 || OthelloBoard.board[move[0] + 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] + 1] != 0;
                 }
                 else{
-                    if (OthelloBoard.board[move[0]-1][move[1]] == 0 && OthelloBoard.board[move[0]][move[1]-1] == 0 && OthelloBoard.board[move[0]+1][move[1]] == 0){
-                        return false;
-                    }
+                    return OthelloBoard.board[move[0] - 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] - 1] != 0 || OthelloBoard.board[move[0] + 1][move[1]] != 0;
                 }
             }
         }
-        // move has to flip other stones
-        return OthelloBoard.flip(move);
+        // A way to check if stones are flipped
     }
     public static int win(){
         // Check for a tie

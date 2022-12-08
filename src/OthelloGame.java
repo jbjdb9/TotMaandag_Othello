@@ -2,8 +2,8 @@ import java.io.IOException;
 import java.util.Random;
 
 public class OthelloGame {
+    static int[] move = {0,0};
     // player int list exists of: {player type, player colour, player stones}
-    static int[] move = {};
     static int[] playerOne = {0, 0, 2, 30};
     static int[] playerTwo = {0, 0, 2, 30};
     static int turn;
@@ -29,7 +29,6 @@ public class OthelloGame {
         Announcer.welcome(turn, playerOne[0], playerTwo[0]);
         while (!gameWin) {
             // Correct player makes a move
-            int[] move = {0,0};
             if (turn == 1) {
                 System.out.println("Player One is up!");
                 switch (playerOne[0]) {

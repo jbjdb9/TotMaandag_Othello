@@ -2,7 +2,7 @@ public class OthelloCalculator {
     //static int move == OthelloGame.move;
     //OthelloBoard.board[move[0][place+1]];
 
-    public static void OthelloCalculator(int[]move, int color){
+    public static void othelloCalculator(int[]move, int color){
         north(move, color);
         northeast(move, color);
         east(move, color);
