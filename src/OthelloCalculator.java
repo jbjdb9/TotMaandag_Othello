@@ -1,18 +1,36 @@
 public class OthelloCalculator {
-    //static int move == OthelloGame.move;
-    //OthelloBoard.board[move[0][place+1]];
 
+    // OthelloCalculator zorgt ervoor dat stenen worden omgedraaid als er een zet gedaan wordt.
+    // othelloCalculator(De methode) vraagt via de klasse OthelloChecker of de zet kan en flipt de stenen vervolgens
+    // met methodes van de klasse OthelloCalulator.
     public static void othelloCalculator(int[]move, int color){
-        north(move, color);
-        northeast(move, color);
-        east(move, color);
-        southeast(move, color);
-        south(move, color);
-        southwest(move, color);
-        west(move, color);
-        northwest(move, color);
+        if (OthelloChecker.north_checker(move, color) == true){
+            north(move, color);
+        }
+        if (OthelloChecker.northeast_checker(move, color) == true){
+            northeast(move, color);
+        }
+        if (OthelloChecker.east_checker(move, color) == true){
+            east(move, color);
+        }
+        if (OthelloChecker.southeast_checker(move, color) == true){
+            southeast(move, color);
+        }
+        if (OthelloChecker.south_checker(move, color)){
+            south(move, color);
+        }
+        if (OthelloChecker.southwest_checker(move, color)==true){
+            southwest(move, color);
+        }
+        if (OthelloChecker.west_checker(move, color)){
+            west(move, color);
+        }
+        if (OthelloChecker.northwest_checker(move, color)==true){
+            northwest(move, color);
+        }
     }
     public static void north(int[]move, int color){
+        //Flipt stenen in noorderlijke richting.
         int place = move[0];
         while(place != 0){
             if(color == OthelloBoard.board[place-1][move[1]]|| OthelloBoard.board[place-1][move[1]] == 0){
@@ -25,6 +43,7 @@ public class OthelloCalculator {
         }
     }
     public static void northeast(int[]move, int color){
+        //Flipt stenen in noordoostelijke richting.
         int place_x = move[1];
         int place_y = move[0];
         while(place_y != 0 && place_x != 7){
@@ -39,6 +58,7 @@ public class OthelloCalculator {
         }
     }
     public static void east(int[]move, int color){
+        //Flipt stenen in oostelijke richting.
         int place = move[1];
         while(place != 7){
             if(color == OthelloBoard.board[move[0]][place+1]|| OthelloBoard.board[move[0]][place+1] == 0){
@@ -51,6 +71,7 @@ public class OthelloCalculator {
         }
     }
     public static void southeast(int[]move, int color){
+        //Flipt stenen in zuidoostelijke richting.
         int place_x = move[1];
         int place_y = move[0];
         while(place_y != 7 && place_x != 7){
@@ -65,6 +86,7 @@ public class OthelloCalculator {
         }
     }
     public static void south(int[]move, int color){
+        //Flipt stenen in zuidelijke richting.
         int place = move[0];
         while(place != 7){
             if(color == OthelloBoard.board[place+1][move[1]]|| OthelloBoard.board[place+1][move[1]] == 0){
@@ -77,6 +99,7 @@ public class OthelloCalculator {
         }
     }
     public static void southwest(int[]move, int color){
+        //Flipt stenen in zuidwestelijke richting.
         int place_x = move[1];
         int place_y = move[0];
         while(place_y != 7 && place_x != 0){
@@ -91,6 +114,7 @@ public class OthelloCalculator {
         }
     }
     public static void west(int[]move, int color){
+        //Flipt stenen in westelijke richting.
         int place = move[1];
         while(place != 0){
             if(color == OthelloBoard.board[move[0]][place-1]|| OthelloBoard.board[move[0]][place-1] == 0){
@@ -103,6 +127,7 @@ public class OthelloCalculator {
         }
     }
     public static void northwest(int[]move, int color){
+        //Flipt stenen in noordwestelijke richting.
         int place_x = move[1];
         int place_y = move[0];
         while(place_y != 0 && place_x != 0){
