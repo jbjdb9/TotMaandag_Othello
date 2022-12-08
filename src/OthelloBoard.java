@@ -48,10 +48,10 @@ public class OthelloBoard {
     public static void update(int[] move) {
         if (OthelloGame.turn == 1) {
             board[move[0]][move[1]] = OthelloGame.playerOne[1];
-            OthelloCalculator.othelloCalculator(move, OthelloGame.playerOne[1]);
+            OthelloCalculator.flipper(move, OthelloGame.playerOne[1]);
         } else {
             board[move[0]][move[1]] = OthelloGame.playerTwo[1];
-            OthelloCalculator.othelloCalculator(move, OthelloGame.playerTwo[1]);
+            OthelloCalculator.flipper(move, OthelloGame.playerTwo[1]);
         }
     }
 }

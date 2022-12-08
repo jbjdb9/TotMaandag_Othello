@@ -1,6 +1,6 @@
 public class OthelloChecker {
     // De klasse OthelloChecker kijkt of het mogelijk is om stenen te flippen.
-    // Dit doet die voor elke richting en geeft voor elke richting een true of flase terug.
+    // Dit doet die voor elke richting en geeft voor elke richting een true of false terug.
     public static boolean north_checker(int[]move, int color){
         // Checkt of stenen geflipt kunnen worden naar noord.
         int place = move[0];
