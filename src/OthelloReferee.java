@@ -10,31 +10,31 @@ public class OthelloReferee {
         }
         // move has to border a stone
         if (move[0] != 0 && move[1] != 0 && move[0] != 7 && move[1] != 7){
-            return OthelloBoard.board[move[0] - 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] - 1] != 0 || OthelloBoard.board[move[0] + 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] + 1] != 0;
+            return OthelloBoard.board[move[0] - 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] - 1] != 0 || OthelloBoard.board[move[0] + 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] + 1] != 0 || OthelloBoard.board[move[0]+1][move[1] + 1] != 0 || OthelloBoard.board[move[0]-1][move[1] + 1] != 0 || OthelloBoard.board[move[0]+1][move[1]-1] != 0 || OthelloBoard.board[move[0]-1][move[1]-1] != 0;
         } else{
             if (move[0] == 0 && move[1] == 0){
-                return OthelloBoard.board[move[0] + 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] + 1] != 0;
+                return OthelloBoard.board[move[0] + 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] + 1] != 0 || OthelloBoard.board[move[0]+1][move[1]+1] != 0;
             }
             else if (move[0] == 0 && move[1] == 7){
-                return OthelloBoard.board[move[0] + 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] - 1] != 0;
+                return OthelloBoard.board[move[0] + 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] - 1] != 0 || OthelloBoard.board[move[0]+1][move[1]-1] != 0;
             }
             else if (move[0] == 7 && move[1] == 0){
-                return OthelloBoard.board[move[0] - 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] + 1] != 0;
+                return OthelloBoard.board[move[0] - 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] + 1] != 0 || OthelloBoard.board[move[0]-1][move[1]+1] != 0;
             }
             else if (move[0] == 7 && move[1] == 7){
-                return OthelloBoard.board[move[0] - 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] - 1] != 0;
+                return OthelloBoard.board[move[0] - 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] - 1] != 0 || OthelloBoard.board[move[0]-1][move[1]-1] != 0;
             } else{
                 if (move[0] == 0){
-                    return OthelloBoard.board[move[0]][move[1] - 1] != 0 || OthelloBoard.board[move[0] + 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] + 1] != 0;
+                    return OthelloBoard.board[move[0]][move[1] - 1] != 0 || OthelloBoard.board[move[0] + 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] + 1] != 0 || OthelloBoard.board[move[0]+1][move[1]+1] != 0 || OthelloBoard.board[move[0]+1][move[1]-1] != 0;
                 }
                 else if (move[0] == 7){
-                    return OthelloBoard.board[move[0] - 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] - 1] != 0 || OthelloBoard.board[move[0]][move[1] + 1] != 0;
+                    return OthelloBoard.board[move[0] - 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] - 1] != 0 || OthelloBoard.board[move[0]][move[1] + 1] != 0 || OthelloBoard.board[move[0]-1][move[1]+1] != 0 || OthelloBoard.board[move[0]-1][move[1]-1] != 0;
                 }
                 else if (move[1] == 0){
-                    return OthelloBoard.board[move[0] - 1][move[1]] != 0 || OthelloBoard.board[move[0] + 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] + 1] != 0;
+                    return OthelloBoard.board[move[0] - 1][move[1]] != 0 || OthelloBoard.board[move[0] + 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] + 1] != 0 || OthelloBoard.board[move[0]+1][move[1]+1] != 0 || OthelloBoard.board[move[0]-1][move[1]+1] != 0;
                 }
-                else{
-                    return OthelloBoard.board[move[0] - 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] - 1] != 0 || OthelloBoard.board[move[0] + 1][move[1]] != 0;
+                else {
+                    return OthelloBoard.board[move[0] - 1][move[1]] != 0 || OthelloBoard.board[move[0]][move[1] - 1] != 0 || OthelloBoard.board[move[0] + 1][move[1]] != 0 || OthelloBoard.board[move[0]+1][move[1]-1] != 0 || OthelloBoard.board[move[0]-1][move[1]-1] != 0;
                 }
             }
         }
