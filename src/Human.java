@@ -13,7 +13,7 @@ public class Human{
             System.out.println("What is your move?: ");
             String input = Play.input.next().toUpperCase();
             if (input.length() == 2){
-                String letters = "ABCDEFG";
+                String letters = "ABCDEFGH";
                 if(letters.contains(Character.toString(input.charAt(0)))){
                     int row = 0;
                     switch (input.charAt(0)) {
