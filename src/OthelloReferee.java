@@ -90,4 +90,15 @@ public class OthelloReferee {
         }
         return true; // return true whether stones have been given to the opponent or not
     }
+    public static int scoreboard(int color){
+        int score = 0;
+        for (int row=0; row<8; row++){
+            for (int col=0; col<8;col++){
+                    if (OthelloBoard.board[row][col] == color){
+                        score++;
+                    }
+            }
+        }
+        return score;
+    }
 }
