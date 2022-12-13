@@ -14,7 +14,7 @@ public class OthelloGame {
         Random rng = new Random();
         turn = rng.nextInt(1, 3);
         // Print the board
-        OthelloBoard.print();
+
         // Set colour based on which player starts
         if (turn == 1){
             playerOne[1] = 1;
@@ -26,8 +26,11 @@ public class OthelloGame {
             System.out.println("Player One is White. Player Two is Black");
         }
         // Welcome the players, notify them who starts and who is playing as what.
+
         Announcer.welcome(turn, playerOne[0], playerTwo[0]);
         while (!gameWin) {
+            // Print the board
+            OthelloBoard.print();
             // Correct player makes a move
             if (turn == 1) {
                 System.out.println("Player One is up!");
@@ -44,10 +47,6 @@ public class OthelloGame {
                 }
             }
             OthelloBoard.update(move);
-
-            // Print the board
-            OthelloBoard.print();
-
             // End the game if no more moves are possible
             if (!OthelloReferee.possibleMove()){
                 gameWin = true;
