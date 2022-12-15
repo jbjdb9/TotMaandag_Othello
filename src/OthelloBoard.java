@@ -53,7 +53,7 @@ public class OthelloBoard {
         System.out.println("\n ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
         // Code for a scoreboard
         System.out.println("- ⚫Black: " + OthelloReferee.scoreboard(1)+" | ⚪White: " + OthelloReferee.scoreboard(2)+" -");
-
+        System.out.println();
     }
     public static void update(int[] move) {
         if (OthelloGame.turn == 1) {
