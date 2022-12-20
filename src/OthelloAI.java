@@ -8,6 +8,34 @@ public class OthelloAI {
         }
         return move;
     }
+
+    public static int NumberofMoves(){
+        // Kijkt hoeveel zetten er mogelijk zijn
+        int count = 0;
+        for (int row=0; row<8; row++){
+            for (int col=0; col<8;col++){
+                if (OthelloReferee.validMove(new int[]{row, col})){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+    public static int[][] getPossibleMoves(){
+        // Maakt een lijst van mogelijke zetten in format {{0, 2}, {4,3}} of {{col, row}}
+        int[][] moves = new int[NumberofMoves()][2];
+        int count = 0;
+        for (int row=0; row<8; row++){
+            for (int col=0; col<8;col++){
+                if (OthelloReferee.validMove(new int[]{row, col})){
+                    moves[count][0] = col;
+                    moves[count][1] = row;
+                    count++;
+                }
+            }
+        }
+        return moves;
+    }
 }
 
 // MinMax-Algoritme bevindingen.
@@ -21,3 +49,4 @@ public class OthelloAI {
 //    en hoeken te pakken.
 //  - De Zijkanten zijn minder van belang zolang er maar een steen van ons tussen ligt anders is blokkeren in
 //    de beste optie.
+
