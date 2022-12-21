@@ -22,8 +22,8 @@ public class OthelloAI {
         return count;
     }
     public static int[][] getPossibleMoves(){
-        // Maakt een lijst van mogelijke zetten in format {{0, 2}, {4,3}} of {{col, row}}
-        int[][] moves = new int[NumberofMoves()][2];
+        // Maakt een lijst van mogelijke zetten in format {{0, 2, 0}, {4 ,3 ,0 }} of {{col, row, score}}
+        int[][] moves = new int[NumberofMoves()][3];
         int count = 0;
         for (int row=0; row<8; row++){
             for (int col=0; col<8;col++){
@@ -35,6 +35,15 @@ public class OthelloAI {
             }
         }
         return moves;
+    }
+    public static int[] AIMove(int [][] positions){
+        int [] bestmove = {positions[0][0], positions[0][1], positions[0][2]};
+        for (int pos=0; pos<positions.length-1; pos++){
+            if (bestmove[2]<positions[pos][2]){
+                bestmove = new int[]{positions[pos][0], positions[pos][1], positions[pos][2]};
+            }
+        }
+        return bestmove;
     }
 }
 
