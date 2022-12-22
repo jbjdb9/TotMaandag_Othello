@@ -2,10 +2,13 @@ import java.io.IOException;
 
 public class OthelloAI {
     public static int[] move() throws IOException {
-        int[] move = {0,0};
+        int[][] posmoves = PositionScore(getPossibleMoves());
+        int [] move = AIMove(posmoves);
+        System.out.println("X = "+move[0] +" Y = "+move[1]);
         if (Play.remote){
             Remote.reverseTranslate(move);
         }
+
         return move;
     }
 
@@ -28,8 +31,8 @@ public class OthelloAI {
         for (int row=0; row<8; row++){
             for (int col=0; col<8;col++){
                 if (OthelloReferee.validMove(new int[]{row, col})){
-                    moves[count][0] = col; //Y-0
-                    moves[count][1] = row; //X-1
+                    moves[count][1] = col; //Y-0
+                    moves[count][0] = row; //X-1
                     count++;
                 }
             }
@@ -61,59 +64,105 @@ public class OthelloAI {
             if (positions[pos][0] == 7 && positions[pos][1] == 7){ //H8
                 positions[pos][2] += 10;
             }
+            // Hoeken om de hoeken
+            // Hoek linksboven
+            if (positions[pos][0] == 0 && positions[pos][1] == 1){ // A2
+                positions[pos][2] -= 5;
+            }
+            if (positions[pos][0] == 1 && positions[pos][1] == 1){ // B2
+                positions[pos][2] -= 5;
+            }
+            if (positions[pos][0] == 1 && positions[pos][1] == 0){ // B1
+                positions[pos][2] -= 5;
+            }
+
+            // Hoek linksonder
+            if (positions[pos][0] == 6 && positions[pos][1] == 0){ // A7
+                positions[pos][2] -= 5;
+            }
+            if (positions[pos][0] == 6 && positions[pos][1] == 1){ // B7
+                positions[pos][2] -= 5;
+            }
+            if (positions[pos][0] == 7 && positions[pos][1] == 1){ // B1
+                positions[pos][2] -= 5;
+            }
+
+            // Hoek rechtsboven
+            if (positions[pos][0] == 0 && positions[pos][1] == 6){ // G1
+                positions[pos][2] -= 5;
+            }
+            if (positions[pos][0] == 1 && positions[pos][1] == 6){ // G2
+                positions[pos][2] -= 5;
+            }
+            if (positions[pos][0] == 1 && positions[pos][1] == 7){ // H2
+                positions[pos][2] -= 5;
+            }
+
+            // Hoek rechtsonder
+            if (positions[pos][0] == 6 && positions[pos][1] == 6){ // G7
+                positions[pos][2] -= 5;
+            }
+            if (positions[pos][0] == 6 && positions[pos][1] == 7){ // G8
+                positions[pos][2] -= 5;
+            }
+            if (positions[pos][0] == 7 && positions[pos][1] == 6){ // G8
+                positions[pos][2] -= 5;
+            }
+
+
 ///////////////////////////////////////////////////////////////////////////////////
             // Stroken buitenkant boven horizontaal
             for (int place=2;place<6;place++){ // C1 t/m F1
                 if (positions[pos][0] == 0 && positions[pos][1] == place){
-                    positions[pos][2] += + 3;
+                    positions[pos][2] +=  3;
                 }
             }
             // Stroken buitenkant onder horizontaal
             for (int place=2;place<6;place++){ // C8 t/m F8
                 if (positions[pos][0] == 7 && positions[pos][1] == place){
-                    positions[pos][2] += + 3;
+                    positions[pos][2] +=  3;
                 }
             }
 
             // Stroken buitenkant links verticaal
             for (int place=2;place<6;place++){ // A3 t/m A6
                 if (positions[pos][0] == place && positions[pos][1] == 0){
-                    positions[pos][2] += + 3;
+                    positions[pos][2] +=  3;
                 }
             }
 
             // Stroken buitenkant rechts verticaal
             for (int place=2;place<6;place++){ // H3 t/m H6
                 if (positions[pos][0] == place && positions[pos][1] == 7){
-                    positions[pos][2] += + 3;
+                    positions[pos][2] +=  3;
                 }
             }
 //////////////////////////////////////////////////////////////////////////////////////
             // Stroken binnen aan de buitenkant boven
             for (int place=2;place<6;place++){ // C2 t/m F2
                 if (positions[pos][0] == 1 && positions[pos][1] == place){
-                    positions[pos][2] -= + 3;
+                    positions[pos][2] -=  3;
                 }
             }
 
             // Stroken binnen aan de onderkant boven
             for (int place=2;place<6;place++){ // C7 t/m F7
                 if (positions[pos][0] == 6 && positions[pos][1] == place){
-                    positions[pos][2] -= + 3;
+                    positions[pos][2] -=  3;
                 }
             }
 
             // Stroken binnen aan de zijkant links
             for (int place=2;place<6;place++){ // B3 t/m B6
                 if (positions[pos][0] == place && positions[pos][1] == 1){
-                    positions[pos][2] -= + 3;
+                    positions[pos][2] -=  3;
                 }
             }
 
             // Stroken binnen aan de zijkant rechts
             for (int place=2;place<6;place++){ // G3 t/m G6
                 if (positions[pos][0] == place && positions[pos][1] == 6){
-                    positions[pos][2] -= + 3;
+                    positions[pos][2] -=  3;
                 }
             }
         }
