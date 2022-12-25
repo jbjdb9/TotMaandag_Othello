@@ -1,17 +1,16 @@
+import java.awt.desktop.ScreenSleepEvent;
 import java.io.IOException;
-
 public class OthelloAI {
     public static int[] move() throws IOException {
         int[][] posmoves = PositionScore(getPossibleMoves());
         int [] move = AIMove(posmoves);
-        System.out.println("X = "+move[0] +" Y = "+move[1]);
+        System.out.println("De AI had als zet: " + PositionTranslate(move)+(move[0]+1));
         if (Play.remote){
             Remote.reverseTranslate(move);
         }
 
         return move;
     }
-
     public static int NumberofMoves(){
         // Kijkt hoeveel zetten er mogelijk zijn
         int count = 0;
@@ -48,7 +47,6 @@ public class OthelloAI {
         }
         return bestmove;
     }
-
     public static int[][] PositionScore(int[][] positions){
         for(int pos=0; pos<positions.length-1;pos++){
             //Hoeken
@@ -108,8 +106,6 @@ public class OthelloAI {
             if (positions[pos][0] == 7 && positions[pos][1] == 6){ // G8
                 positions[pos][2] -= 5;
             }
-
-
 ///////////////////////////////////////////////////////////////////////////////////
             // Stroken buitenkant boven horizontaal
             for (int place=2;place<6;place++){ // C1 t/m F1
@@ -144,21 +140,18 @@ public class OthelloAI {
                     positions[pos][2] -=  3;
                 }
             }
-
             // Stroken binnen aan de onderkant boven
             for (int place=2;place<6;place++){ // C7 t/m F7
                 if (positions[pos][0] == 6 && positions[pos][1] == place){
                     positions[pos][2] -=  3;
                 }
             }
-
             // Stroken binnen aan de zijkant links
             for (int place=2;place<6;place++){ // B3 t/m B6
                 if (positions[pos][0] == place && positions[pos][1] == 1){
                     positions[pos][2] -=  3;
                 }
             }
-
             // Stroken binnen aan de zijkant rechts
             for (int place=2;place<6;place++){ // G3 t/m G6
                 if (positions[pos][0] == place && positions[pos][1] == 6){
@@ -168,8 +161,34 @@ public class OthelloAI {
         }
         return positions;
     }
+    public static char PositionTranslate(int[] position){
+        if (position[1] == 0){
+            return 'A';
+        }
+        if (position[1] == 1){
+            return 'B';
+        }
+        if (position[1] == 2){
+            return 'C';
+        }
+        if (position[1] == 3){
+            return 'D';
+        }
+        if (position[1] == 4){
+            return 'E';
+        }
+        if (position[1] == 5){
+            return 'F';
+        }
+        if (position[1] == 6){
+            return 'G';
+        }
+        if (position[1] == 7){
+            return 'H';
+        }
+        return '?';
+    }
 }
-
 // MinMax-Algoritme bevindingen.
 //  - Als er een zet gedaan kan worden in de hoeken (A1, A8, H1, H8) heeft dit de grootste prioriteit.
 //    Dit is namelijk zo omdat dit ervoor zorgt dat je het veld vanuit die hoek kan beheersen.
