@@ -6,7 +6,7 @@ import java.net.Socket;
 
 public class Connect {
     public static Socket connection;
-    public static String username = "TotMaandag";
+    public static String username = "TotMaandag1";
     public static boolean connected = false;
     public static boolean connect() throws IOException {
         try {

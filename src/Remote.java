@@ -35,10 +35,13 @@ public class Remote{
             if (response.contains("{")) {
                 info = response.substring(response.indexOf("{"));
             }
-            if (responseParts[0].contains("MOVE") && !info.contains(Connect.username)) {
+            System.out.println(info);
+            System.out.println(responseParts[0]);
+            if (!info.contains(Connect.username)) {
                 moved = true;
                 int zet = info.lastIndexOf("MOVE: " + 2);
                 move = (Integer.parseInt(info.substring(zet)));
+                System.out.println(move);
             }
         }
         return move;
@@ -80,12 +83,11 @@ public class Remote{
                 continue;
             }
             String[] responseParts = response.split(" ");
-            if (responseParts[0].contains("YOURTURN")) {
                 ourMove = true;
                 out.println("move " + move);
                 // WAIT for the server to request a move (handleInGame)
                 // send the move our AI made to the server
-            }
+
         }
 }
     public static void subscribe() throws IOException {
@@ -147,17 +149,32 @@ public class Remote{
             String info = "";
             if (response.contains("{")) {
                 info = response.substring(response.indexOf("{"));
+                System.out.println(info);
+                System.out.println("hoi");
+                System.out.println(responseParts[0]);
             }
-            if (responseParts[0].contains("MATCH") && info.contains("TicTacToe")) {
+            if (info.contains("TicTacToe")) {
                 inGame = true;
                 Play.game = 0;
                 matched = true;
-            } else if (responseParts[0].contains("MATCH") && info.contains("Reversi")) {
+                System.out.println("hallo");
+//                if (info.contains(Connect.username)) {
+//                    wij beginnen
+//                } else {
+//                        tegenstander begint
+
+            } else if (info.contains("Reversi")) {
                 inGame = true;
                 Play.game = 1;
                 matched = true;
+                System.out.println("hallo");
+//                if (info.contains(Connect.username)) {
+//                    wij beginnen
+//                } else {
+//                        tegenstander begint
             }
         }
+        move();
     }
 }
 
