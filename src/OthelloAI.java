@@ -10,14 +10,35 @@ public class OthelloAI {
             {-5, -5, -2, -2, -2, -2, -5, -5},
             {10, -5, 3, 3, 3, 3, -5, 10}};
 
+    public static int[] Max(int[][] positions) {
+        int[] bestmove = {positions[0][0], positions[0][1], positions[0][2]};
+        for (int pos = 0; pos < positions.length - 1; pos++) {
+            if (bestmove[2] < positions[pos][2]) {
+                bestmove = new int[]{positions[pos][0], positions[pos][1], positions[pos][2]};
+            }
+        }
+        return bestmove;
+    }
+
+    public static int[] Min(int[][] positions) {
+        int[] bestmove = {positions[0][0], positions[0][1], positions[0][2]};
+        for (int pos = 0; pos < positions.length - 1; pos++) {
+            if (bestmove[2] > positions[pos][2]) {
+                bestmove = new int[]{positions[pos][0], positions[pos][1], positions[pos][2]};
+            }
+        }
+        return bestmove;
+    }
+    public static int[] MiniMax(){
+
+    }
     public static int[] move() throws IOException {
         int[][] posmoves = moveScore(getPossibleMoves());
-        int[] move = AIMove(posmoves);
+        int[] move = Max(posmoves);
         System.out.println("De AI had als zet: " + PositionTranslate(move) + (move[0] + 1));
         if (Play.remote) {
             Remote.reverseTranslate(move);
         }
-
         return move;
     }
 
@@ -48,16 +69,6 @@ public class OthelloAI {
             }
         }
         return moves;
-    }
-
-    public static int[] AIMove(int[][] positions) {
-        int[] bestmove = {positions[0][0], positions[0][1], positions[0][2]};
-        for (int pos = 0; pos < positions.length - 1; pos++) {
-            if (bestmove[2] < positions[pos][2]) {
-                bestmove = new int[]{positions[pos][0], positions[pos][1], positions[pos][2]};
-            }
-        }
-        return bestmove;
     }
 
     public static char PositionTranslate(int[] position) {
