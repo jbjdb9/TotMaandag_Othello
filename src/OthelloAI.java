@@ -1,7 +1,6 @@
-import java.awt.desktop.ScreenSleepEvent;
 import java.io.IOException;
 public class OthelloAI {
-    static int[][] pointboard = {{10, -5, 3, 3, 3, 3, -5, 10},
+    static int[][] pointBoard = {{10, -5, 3, 3, 3, 3, -5, 10},
             {-5, -5, -2, -2, -2, -2, -5, -5},
             {3, -2, 0, 0, 0, 0, -2, 3},
             {3, -2, 0, 0, 0, 0, -2, 3},
@@ -10,70 +9,52 @@ public class OthelloAI {
             {-5, -5, -2, -2, -2, -2, -5, -5},
             {10, -5, 3, 3, 3, 3, -5, 10}};
 
-    public static int[] Max(int[][] positions) {
-        int[] bestmove = {positions[0][0], positions[0][1], positions[0][2]};
-        for (int pos = 0; pos < positions.length - 1; pos++) {
-            if (bestmove[2] < positions[pos][2]) {
-                bestmove = new int[]{positions[pos][0], positions[pos][1], positions[pos][2]};
-            }
-        }
-        return bestmove;
-    }
-
-    public static int[] Min(int[][] positions) {
-        int[] bestmove = {positions[0][0], positions[0][1], positions[0][2]};
-        for (int pos = 0; pos < positions.length - 1; pos++) {
-            if (bestmove[2] > positions[pos][2]) {
-                bestmove = new int[]{positions[pos][0], positions[pos][1], positions[pos][2]};
-            }
-        }
-        return bestmove;
-    }
-    public static int MiniMax(int[] position, int depth, boolean maxiPlayer, int[][] board){
+    public static int miniMax(int[] position, int depth, boolean maxiPlayer, int[][] board){
         int[][] children = getPossibleMoves(board);
         int[] pos = {0, 0};
         if (depth == 0 || children.length == 0){
-            return pointboard[position[0]][position[1]] + ReturnScore(position, board);
+            return pointBoard[position[0]][position[1]] + returnScore(position, board);
         }
         if (maxiPlayer){
             int maxEval = Integer.MIN_VALUE;
-            for (int index=0; index < children.length-1; index++){
-                pos[0] = children[index][0];
-                pos[1] = children[index][1];
+            for (int[] child : children) {
+                pos[0] = child[0];
+                pos[1] = child[1];
                 board[pos[0]][pos[1]] = OthelloGame.turn;
-                int eval = MiniMax(pos, depth-1, false, board);
+                int eval = miniMax(pos, depth - 1, false, board);
                 maxEval = Math.max(eval, maxEval);
             }
             return maxEval;
         }
         else {
             int minEval = Integer.MAX_VALUE;
-            for (int index=0; index < children.length-1; index++){
-                pos[0] = children[index][0];
-                pos[1] = children[index][1];
+            for (int[] child : children) {
+                pos[0] = child[0];
+                pos[1] = child[1];
                 board[pos[0]][pos[1]] = OthelloGame.turn;
-                int eval = MiniMax(pos, depth-1, true, board);
+                int eval = miniMax(pos, depth - 1, true, board);
                 minEval = Math.min(eval, minEval);
             }
             return minEval;
         }
     }
     public static int[] move() throws IOException {
-        int score = 0;
-        int bestScore = 0;
+        int score;
+        int bestScore = Integer.MIN_VALUE;
         int[] position = {0,0};
         int[] bestPosition = {0,0};
 
         int[][] positions = getPossibleMoves(OthelloBoard.board);
-        for (int index = 0; index < positions.length-1; index++){
-            position[0] = positions[index][0];
-            position[1] = positions[index][1];
-            int[][] board = BoardCopy();
+        for (int[] ints : positions) {
+            position[0] = ints[0];
+            position[1] = ints[1];
+            int[][] board = boardCopy();
 
             // Aanpassen voor checks! Minimax/AlphaBeta/Random
-            score = MiniMax(position, 3, true, board);
+            score = miniMax(position, 4, true, board);
+            System.out.println("score =" + score);
 
-            if (score > bestScore){
+            if (score > bestScore) {
                 bestScore = score;
                 bestPosition = position;
             }
@@ -86,7 +67,7 @@ public class OthelloAI {
         return bestPosition;
     }
 
-    public static int NumberofMoves(int[][] board) {
+    public static int numberOfMoves(int[][] board) {
         // Kijkt hoeveel zetten er mogelijk zijn
         int count = 0;
         for (int row = 0; row < 8; row++) {
@@ -100,8 +81,7 @@ public class OthelloAI {
     }
 
     public static int[][] getPossibleMoves(int[][] board) {
-        // Maakt een lijst van mogelijke zetten in format {{0, 2, 0}, {4 ,3 ,0 }} of {{col, row, score}}
-        int[][] moves = new int[NumberofMoves(board)][3];
+        int[][] moves = new int[numberOfMoves(board)][2];
         int count = 0;
         for (int row = 0; row < 7; row++) {
             for (int col = 0; col < 7; col++) {
@@ -143,53 +123,21 @@ public class OthelloAI {
         return '?';
     }
 
-    public static int[][] moveScore(int[][] positions, int[][] board) {
-        for (int count = 0; positions.length> count; count++) {
-            positions[count][2] = pointboard[positions[count][0]][positions[count][1]];
-            if (OthelloGame.turn == 1) {
-                positions[count][2] = AIChecker.all_check(positions[count], OthelloGame.playerOne[1], board);
-            } else {
-                positions[count][2] = AIChecker.all_check(positions[count], OthelloGame.playerTwo[1], board);
-            }
-
-            System.out.println("score positie "+count+"; "+ positions[count][2]);
-        }
-        System.out.println("Aantal posities gevonden: " + positions.length);
-        return positions;
-    }
-
-    public static int ReturnScore(int[] position, int[][] board){
+    public static int returnScore(int[] position, int[][] board){
         int score = 0;
         if (OthelloGame.turn == 1) {
              score += AIChecker.all_check(position, OthelloGame.playerOne[1], board);
-            return score;
         } else {
             score += AIChecker.all_check(position, OthelloGame.playerTwo[1], board);
-            return score;
         }
+        return score;
     }
 
-    public static int[][] BoardCopy(){
+    public static int[][] boardCopy(){
         int[][] board_copy = new int[8][8];
         for (int row=0; row<7; row++){
-            for (int col=0; col<7; col++){
-                board_copy[row][col] = OthelloBoard.board[row][col];
-            }
+            System.arraycopy(OthelloBoard.board[row], 0, board_copy[row], 0, 7);
         }
         return board_copy;
     }
-
-
 }
-// MinMax-Algoritme bevindingen.
-//  - Als er een zet gedaan kan worden in de hoeken (A1, A8, H1, H8) heeft dit de grootste prioriteit.
-//    Dit is namelijk zo omdat dit ervoor zorgt dat je het veld vanuit die hoek kan beheersen.
-//  - Om zo'n hoek in handen te krijgen hebben een set-up nodig. Een steen in het midden van het bord
-//    die ervoor zorgt dat de steen in de hoek van ons kan worden.
-//  - Een zet om de hoek heen anders genoemd "de dodehoek" (in het geval van hoek A1 zijn dat B1, A2 en B2.) moeten kosten wat kost voorkomen worden.
-//    Hierdoor kan de tegenstander de hoek krijgen en zijn we de lul. Othello is oorlog mensen vergeet dat niet!!!
-//  - Het is ook van belang om het midden te beheren. Vanuit daar kunnen we makkelijker zetten doen om zijkanten
-//    en hoeken te pakken.
-//  - De Zijkanten zijn minder van belang zolang er maar een steen van ons tussen ligt anders is blokkeren in
-//    de beste optie.
-
