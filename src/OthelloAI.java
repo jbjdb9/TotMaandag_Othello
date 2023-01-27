@@ -31,11 +31,31 @@ public class OthelloAI {
     }
     public static int MiniMax(int[] position, int depth, boolean maxiPlayer, int[][] board){
         int[][] children = getPossibleMoves(board);
+        int[] pos = {0, 0};
         if (depth == 0 || children.length == 0){
             return pointboard[position[0]][position[1]] + ReturnScore(position, board);
         }
         if (maxiPlayer){
-
+            int maxEval = Integer.MIN_VALUE;
+            for (int index=0; index < children.length-1; index++){
+                pos[0] = children[index][0];
+                pos[1] = children[index][1];
+                board[pos[0]][pos[1]] = OthelloGame.turn;
+                int eval = MiniMax(pos, depth-1, false, board);
+                maxEval = Math.max(eval, maxEval);
+            }
+            return maxEval;
+        }
+        else {
+            int minEval = Integer.MAX_VALUE;
+            for (int index=0; index < children.length-1; index++){
+                pos[0] = children[index][0];
+                pos[1] = children[index][1];
+                board[pos[0]][pos[1]] = OthelloGame.turn;
+                int eval = MiniMax(pos, depth-1, true, board);
+                minEval = Math.min(eval, minEval);
+            }
+            return minEval;
         }
     }
     public static int[] move() throws IOException {
@@ -45,10 +65,10 @@ public class OthelloAI {
         int[] bestPosition = {0,0};
 
         int[][] positions = getPossibleMoves(OthelloBoard.board);
-        for (int index = 0; index < positions.length; index++){
+        for (int index = 0; index < positions.length-1; index++){
             position[0] = positions[index][0];
             position[1] = positions[index][1];
-            int[][] board = OthelloBoard.board;
+            int[][] board = BoardCopy();
 
             // Aanpassen voor checks! Minimax/AlphaBeta/Random
             score = MiniMax(position, 3, true, board);
@@ -83,8 +103,8 @@ public class OthelloAI {
         // Maakt een lijst van mogelijke zetten in format {{0, 2, 0}, {4 ,3 ,0 }} of {{col, row, score}}
         int[][] moves = new int[NumberofMoves(board)][3];
         int count = 0;
-        for (int row = 0; row < 8; row++) {
-            for (int col = 0; col < 8; col++) {
+        for (int row = 0; row < 7; row++) {
+            for (int col = 0; col < 7; col++) {
                 if (OthelloReferee.validMove(new int[]{row, col}, board)) {
                     moves[count][1] = col; //Y-0
                     moves[count][0] = row; //X-1
@@ -139,13 +159,24 @@ public class OthelloAI {
     }
 
     public static int ReturnScore(int[] position, int[][] board){
+        int score = 0;
         if (OthelloGame.turn == 1) {
-            position[2] += AIChecker.all_check(position, OthelloGame.playerOne[1], board);
-            return position[2];
+             score += AIChecker.all_check(position, OthelloGame.playerOne[1], board);
+            return score;
         } else {
-            position[2] += AIChecker.all_check(position, OthelloGame.playerTwo[1], board);
-            return position[2];
+            score += AIChecker.all_check(position, OthelloGame.playerTwo[1], board);
+            return score;
         }
+    }
+
+    public static int[][] BoardCopy(){
+        int[][] board_copy = new int[8][8];
+        for (int row=0; row<7; row++){
+            for (int col=0; col<7; col++){
+                board_copy[row][col] = OthelloBoard.board[row][col];
+            }
+        }
+        return board_copy;
     }
 
 
