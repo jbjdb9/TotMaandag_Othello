@@ -9,7 +9,7 @@ public class Human{
     }
     static public int[] othelloMove(){
         int[] move = {-1,-1};
-        while (!OthelloReferee.validMove(move)) {
+        while (!OthelloReferee.validMove(move, OthelloBoard.board)) {
             System.out.println("What is your move?: ");
             String input = Play.input.next().toUpperCase();
             if (input.length() == 2){

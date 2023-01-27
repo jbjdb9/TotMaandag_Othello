@@ -47,7 +47,7 @@ public class OthelloAI {
         int count = 0;
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                if (OthelloReferee.validMove(new int[]{row, col})) {
+                if (OthelloReferee.validMove(new int[]{row, col}, OthelloBoard.board)) {
                     count++;
                 }
             }
@@ -61,7 +61,7 @@ public class OthelloAI {
         int count = 0;
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                if (OthelloReferee.validMove(new int[]{row, col})) {
+                if (OthelloReferee.validMove(new int[]{row, col}, OthelloBoard.board)) {
                     moves[count][1] = col; //Y-0
                     moves[count][0] = row; //X-1
                     count++;

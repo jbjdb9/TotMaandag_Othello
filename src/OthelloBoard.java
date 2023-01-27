@@ -38,7 +38,7 @@ public class OthelloBoard {
                     }
                 }
                 else {
-                    if (OthelloReferee.validMove(new int[]{row, column})){
+                    if (OthelloReferee.validMove(new int[]{row, column}, OthelloBoard.board)){
                         System.out.print("❎|");
                     }
                     else {
