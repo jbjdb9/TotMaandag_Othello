@@ -29,11 +29,17 @@ public class OthelloAI {
         }
         return bestmove;
     }
-    public static int[] MiniMax(){
+    public static int MiniMax(int[] position, int depth, boolean maxiPlayer, int[][] board){
+        int[][] children = getPossibleMoves(board);
+        if (depth == 0 || children.length == 0){
+            return pointboard[position[0]][position[1]] + ReturnScore(position, board);
+        }
+        if (maxiPlayer){
 
+        }
     }
-    public static int[] move() throws IOException {
-        int[][] posmoves = moveScore(getPossibleMoves());
+    public static int[] move(int[][] board) throws IOException {
+        int[][] posmoves = moveScore(getPossibleMoves(board), board);
         int[] move = Max(posmoves);
         System.out.println("De AI had als zet: " + PositionTranslate(move) + (move[0] + 1));
         if (Play.remote) {
@@ -42,12 +48,12 @@ public class OthelloAI {
         return move;
     }
 
-    public static int NumberofMoves() {
+    public static int NumberofMoves(int[][] board) {
         // Kijkt hoeveel zetten er mogelijk zijn
         int count = 0;
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                if (OthelloReferee.validMove(new int[]{row, col}, OthelloBoard.board)) {
+                if (OthelloReferee.validMove(new int[]{row, col}, board)) {
                     count++;
                 }
             }
@@ -55,13 +61,13 @@ public class OthelloAI {
         return count;
     }
 
-    public static int[][] getPossibleMoves() {
+    public static int[][] getPossibleMoves(int[][] board) {
         // Maakt een lijst van mogelijke zetten in format {{0, 2, 0}, {4 ,3 ,0 }} of {{col, row, score}}
-        int[][] moves = new int[NumberofMoves()][3];
+        int[][] moves = new int[NumberofMoves(board)][3];
         int count = 0;
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                if (OthelloReferee.validMove(new int[]{row, col}, OthelloBoard.board)) {
+                if (OthelloReferee.validMove(new int[]{row, col}, board)) {
                     moves[count][1] = col; //Y-0
                     moves[count][0] = row; //X-1
                     count++;
@@ -99,13 +105,13 @@ public class OthelloAI {
         return '?';
     }
 
-    public static int[][] moveScore(int[][] positions) {
+    public static int[][] moveScore(int[][] positions, int[][] board) {
         for (int count = 0; positions.length> count; count++) {
             positions[count][2] = pointboard[positions[count][0]][positions[count][1]];
             if (OthelloGame.turn == 1) {
-                positions[count][2] = AIChecker.all_check(positions[count], OthelloGame.playerOne[1]);
+                positions[count][2] = AIChecker.all_check(positions[count], OthelloGame.playerOne[1], board);
             } else {
-                positions[count][2] = AIChecker.all_check(positions[count], OthelloGame.playerTwo[1]);
+                positions[count][2] = AIChecker.all_check(positions[count], OthelloGame.playerTwo[1], board);
             }
 
             System.out.println("score positie "+count+"; "+ positions[count][2]);
@@ -113,6 +119,17 @@ public class OthelloAI {
         System.out.println("Aantal posities gevonden: " + positions.length);
         return positions;
     }
+
+    public static int ReturnScore(int[] position, int[][] board){
+        if (OthelloGame.turn == 1) {
+            position[2] += AIChecker.all_check(position, OthelloGame.playerOne[1], board);
+            return position[2];
+        } else {
+            position[2] += AIChecker.all_check(position, OthelloGame.playerTwo[1], board);
+            return position[2];
+        }
+    }
+
 
 }
 // MinMax-Algoritme bevindingen.
