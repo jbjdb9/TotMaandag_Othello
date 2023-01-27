@@ -38,14 +38,32 @@ public class OthelloAI {
 
         }
     }
-    public static int[] move(int[][] board) throws IOException {
-        int[][] posmoves = moveScore(getPossibleMoves(board), board);
-        int[] move = Max(posmoves);
-        System.out.println("De AI had als zet: " + PositionTranslate(move) + (move[0] + 1));
-        if (Play.remote) {
-            Remote.reverseTranslate(move);
+    public static int[] move() throws IOException {
+        int score = 0;
+        int bestScore = 0;
+        int[] position = {0,0};
+        int[] bestPosition = {0,0};
+
+        int[][] positions = getPossibleMoves(OthelloBoard.board);
+        for (int index = 0; index < positions.length; index++){
+            position[0] = positions[index][0];
+            position[1] = positions[index][1];
+            int[][] board = OthelloBoard.board;
+
+            // Aanpassen voor checks! Minimax/AlphaBeta/Random
+            score = MiniMax(position, 3, true, board);
+
+            if (score > bestScore){
+                bestScore = score;
+                bestPosition = position;
+            }
         }
-        return move;
+
+        System.out.println("De AI had als zet: " + PositionTranslate(bestPosition) + (bestPosition[0] + 1));
+        if (Play.remote) {
+            Remote.reverseTranslate(bestPosition);
+        }
+        return bestPosition;
     }
 
     public static int NumberofMoves(int[][] board) {
