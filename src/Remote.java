@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class Remote{
+public class Remote {
     static boolean inGame = false;
     static Scanner input = new Scanner(System.in);
 
@@ -40,6 +40,8 @@ public class Remote{
             if (!info.contains(Connect.username)) {
                 moved = true;
                 int zet = info.lastIndexOf("MOVE: " + 2);
+                //zet lezen gaat hier niet goed.
+                System.out.println(zet);
                 move = (Integer.parseInt(info.substring(zet)));
                 System.out.println(move);
             }
@@ -49,20 +51,20 @@ public class Remote{
 
     public static int[] translate() throws IOException {
         int [] move = {-1, -1};
-        int row = (move() / 8);
-        int col = (move() % 8);
+        int col = (move() / 8);
+        int row = (move() % 8);
         move[0] = col;
         move[1] = row;
         return move;
     }
 
     public static void reverseTranslate(int[] move) throws IOException {
-        int row = (move[1] * 8);
-        int col = (move[0]);
+        int col = (move[1] * 8);
+        int row = (move[0]);
         aiMoved(row + col);
     }
 
-    public static void aiMoved(int move) throws IOException{
+    public static void aiMoved(int move) throws IOException {
         boolean ourMove = false;
         String response = null;
         BufferedReader in = new BufferedReader(new InputStreamReader(Connect.connection.getInputStream()));
@@ -83,13 +85,14 @@ public class Remote{
                 continue;
             }
             String[] responseParts = response.split(" ");
-                ourMove = true;
-                out.println("move " + move);
-                // WAIT for the server to request a move (handleInGame)
-                // send the move our AI made to the server
+            ourMove = true;
+            out.println("move " + move);
+            // WAIT for the server to request a move (handleInGame)
+            // send the move our AI made to the server
 
         }
-}
+    }
+
     public static void subscribe() throws IOException {
         boolean ok = false;
         String response = null;
@@ -97,7 +100,7 @@ public class Remote{
         PrintWriter out = new PrintWriter(Connect.connection.getOutputStream(), true);
         System.out.println("what would you like to play?\n=================================\n1 - TicTacToe\n2 - Othello");
         String game = input.nextLine();
-        if (game.equals("1")){
+        if (game.equals("1")) {
             out.println("subscribe tic-tac-toe");
         } else if (game.equals("2")) {
             out.println("subscribe reversi");
@@ -126,6 +129,7 @@ public class Remote{
         match();
 
     }
+
     public static void match() throws IOException {
         boolean matched = false;
         String response = null;
@@ -168,13 +172,13 @@ public class Remote{
                 Play.game = 1;
                 matched = true;
                 System.out.println("hallo");
-//                if (info.contains(Connect.username)) {
-//                    wij beginnen
-//                } else {
-//                        tegenstander begint
+                if (info.contains(Connect.username)) {
+                    OthelloGame.turn = 1;
+                } else {
+                    OthelloGame.turn = 2;
+                }
             }
         }
-        move();
     }
 }
 
