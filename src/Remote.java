@@ -35,33 +35,37 @@ public class Remote {
             if (response.contains("{")) {
                 info = response.substring(response.indexOf("{"));
             }
-            System.out.println(info);
-            System.out.println(responseParts[0]);
-            if (!info.contains(Connect.username)) {
+            System.out.println("remote move lijn : " + info);
+            if (!info.contains(Connect.username) && info.contains("move") && info.contains("details")) {
                 moved = true;
-                int zet = info.lastIndexOf("MOVE: " + 2);
+                String[] arrOfstr = info.split("\"" , 5);
+                System.out.println(arrOfstr[3]);
+                move = Integer.parseInt(arrOfstr[3]);
+                //str.split op "MOVE"?
                 //zet lezen gaat hier niet goed.
-                System.out.println(zet);
-                move = (Integer.parseInt(info.substring(zet)));
-                System.out.println(move);
+                //System.out.println(zet);
+                //move = (Integer.parseInt(info.substring(zet)));
+                //System.out.println(move);
             }
         }
         return move;
     }
 
     public static int[] translate() throws IOException {
-        int [] move = {-1, -1};
+        int [] move = {0, 0};
         int col = (move() / 8);
         int row = (move() % 8);
-        move[0] = col;
-        move[1] = row;
+        move[1] = col;
+        move[0] = row;
         return move;
     }
 
     public static void reverseTranslate(int[] move) throws IOException {
-        int col = (move[1] * 8);
-        int row = (move[0]);
-        aiMoved(row + col);
+        int y = (move[0] + 1) * 8;
+        System.out.println("y" + y);
+        int x = move[1];
+        System.out.println("x" + x);
+        aiMoved(x + y);
     }
 
     public static void aiMoved(int move) throws IOException {
@@ -85,11 +89,17 @@ public class Remote {
                 continue;
             }
             String[] responseParts = response.split(" ");
-            ourMove = true;
-            out.println("move " + move);
-            // WAIT for the server to request a move (handleInGame)
-            // send the move our AI made to the server
-
+            String info = "";
+            if (response.contains("{")) {
+                info = response.substring(response.indexOf("{"));
+            }
+            System.out.println("aimoved info = " + info);
+            if (info.contains("TURNMESSAGE: ")) {
+                out.println("move " + move);
+                ourMove = true;
+                // WAIT for the server to request a move (handleInGame)
+                // send the move our AI made to the server
+            }
         }
     }
 
@@ -162,10 +172,11 @@ public class Remote {
                 Play.game = 0;
                 matched = true;
                 System.out.println("hallo");
-//                if (info.contains(Connect.username)) {
-//                    wij beginnen
-//                } else {
-//                        tegenstander begint
+                if (info.contains(Connect.username)) {
+                    TcGame.turn = 1;
+                } else {
+                    TcGame.turn = 2;
+                }
 
             } else if (info.contains("Reversi")) {
                 inGame = true;
