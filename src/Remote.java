@@ -10,10 +10,11 @@ public class Remote {
 
     // Some way to handle the server telling you the match has ended !
 
-    public static int move() throws IOException {
+    public static int [] move() throws IOException {
         boolean moved = false;
         String response = null;
         int move = 0;
+        int [] localmove = {0,0};
         BufferedReader in = new BufferedReader(new InputStreamReader(Connect.connection.getInputStream()));
         while (!moved) {
             try {
@@ -42,21 +43,28 @@ public class Remote {
                 System.out.println(arrOfstr[3]);
                 move = Integer.parseInt(arrOfstr[3]);
                 System.out.println("u bent nu in de move lees functie, move = " + move);
+                System.out.println("u bent nu in de move lees functie, move = " + move);
+                int col = (move / 8);
+                System.out.println("translate col = " + col);
+                int row = (move % 8);
+                System.out.println("translate row = " + row);
+                localmove[0] = col;
+                localmove[1] = row;
             }
         }
-        return move;
+        return localmove;
     }
 
-    public static int[] translate() throws IOException {
-        int [] move = {0, 0};
-        int col = (move() / 8);
-        System.out.println("translate col = " + col);
-        int row = (move() % 8);
-        System.out.println("translate row = " + row);
-        move[1] = col;
-        move[0] = row;
-        return move;
-    }
+//    public static int[] translate() throws IOException {
+//        int [] move = {0, 0};
+//        int col = (move() / 8);
+//        System.out.println("translate col = " + col);
+//        int row = (move() % 8);
+//        System.out.println("translate row = " + row);
+//        move[0] = col;
+//        move[1] = row;
+//        return move;
+//    }
 
     public static void reverseTranslate(int[] move) throws IOException {
         int y = (move[0]) * 8;

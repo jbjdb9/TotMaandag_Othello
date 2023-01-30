@@ -29,7 +29,7 @@ public class TcGame {
                 switch (playerTwo) {
                     case 0 -> move = Human.tcMove();
                     case 1 -> move = TcAI.move();
-                    case 2 -> move = Remote.move();
+                    //case 2 -> move = Remote.move();
                 }
             }
             TcBoard.update(move);
