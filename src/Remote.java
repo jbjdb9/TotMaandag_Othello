@@ -36,7 +36,7 @@ public class Remote {
                 info = response.substring(response.indexOf("{"));
             }
             System.out.println("remote move lijn 38 : " + info);
-            if (!info.contains(Connect.username) && info.contains("move") && info.contains("details")) {
+            if (!info.contains(Connect.username) && info.contains("MOVE")) {
                 moved = true;
                 String[] arrOfstr = info.split("\"" , 5);
                 System.out.println(arrOfstr[3]);
@@ -59,7 +59,7 @@ public class Remote {
     }
 
     public static void reverseTranslate(int[] move) throws IOException {
-        int y = (move[0] + 1) * 8;
+        int y = (move[0]) * 8;
         System.out.println("y" + y);
         int x = move[1];
         System.out.println("x" + x);
