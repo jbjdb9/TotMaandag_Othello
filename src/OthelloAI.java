@@ -9,7 +9,7 @@ public class OthelloAI {
             {-5, -5, -2, -2, -2, -2, -5, -5},
             {10, -5, 3, 3, 3, 3, -5, 10}};
 
-    public static int miniMax(int[] position, int depth, boolean maxiPlayer, int[][] board){
+    public static int miniMax(int[] position, int depth, boolean maxiPlayer, int[][] board, int turn){
         int[][] children = getPossibleMoves(board);
         int[] pos = {0, 0};
         if (depth == 0 || children.length == 0){
@@ -20,8 +20,9 @@ public class OthelloAI {
             for (int[] child : children) {
                 pos[0] = child[0];
                 pos[1] = child[1];
-                board[pos[0]][pos[1]] = OthelloGame.turn;
-                int eval = miniMax(pos, depth - 1, false, board);
+                OthelloBoard.update(child, board, turn);
+                turn = turnSwitch(turn);
+                int eval = miniMax(pos, depth - 1, false, board, turn);
                 maxEval = Math.max(eval, maxEval);
             }
             return maxEval;
@@ -31,14 +32,23 @@ public class OthelloAI {
             for (int[] child : children) {
                 pos[0] = child[0];
                 pos[1] = child[1];
-                board[pos[0]][pos[1]] = OthelloGame.turn;
-                int eval = miniMax(pos, depth - 1, true, board);
+                OthelloBoard.update(child, board, turn);
+                turn = turnSwitch(turn);
+                int eval = miniMax(pos, depth - 1, true, board, turn);
                 minEval = Math.min(eval, minEval);
             }
             return minEval;
         }
     }
+    public static int turnSwitch(int turn) {
+        if (turn == 2) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
     public static int[] move() throws IOException {
+        int turn = OthelloGame.turn;
         int score;
         int bestScore = Integer.MIN_VALUE;
         int[] position = {0,0};
@@ -51,8 +61,7 @@ public class OthelloAI {
             int[][] board = boardCopy();
 
             // Aanpassen voor checks! Minimax/AlphaBeta/Random
-            score = miniMax(position, 4, true, board);
-            System.out.println("score =" + score);
+            score = miniMax(position, 5, true, board, turn);
 
             if (score > bestScore) {
                 bestScore = score;
@@ -83,8 +92,8 @@ public class OthelloAI {
     public static int[][] getPossibleMoves(int[][] board) {
         int[][] moves = new int[numberOfMoves(board)][2];
         int count = 0;
-        for (int row = 0; row < 7; row++) {
-            for (int col = 0; col < 7; col++) {
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
                 if (OthelloReferee.validMove(new int[]{row, col}, board)) {
                     moves[count][1] = col; //Y-0
                     moves[count][0] = row; //X-1
@@ -135,7 +144,7 @@ public class OthelloAI {
 
     public static int[][] boardCopy(){
         int[][] board_copy = new int[8][8];
-        for (int row=0; row<7; row++){
+        for (int row=0; row < 8; row++){
             System.arraycopy(OthelloBoard.board[row], 0, board_copy[row], 0, 7);
         }
         return board_copy;

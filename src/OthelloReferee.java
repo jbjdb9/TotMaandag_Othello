@@ -57,9 +57,9 @@ public class OthelloReferee {
             }
         }
         if (OthelloGame.turn == 1) {
-            return OthelloCalculator.calculator(move, OthelloGame.playerOne[1]);
+            return OthelloCalculator.calculator(move, OthelloGame.playerOne[1], OthelloBoard.board);
         } else {
-            return OthelloCalculator.calculator(move, OthelloGame.playerTwo[1]);
+            return OthelloCalculator.calculator(move, OthelloGame.playerTwo[1], OthelloBoard.board);
         }
     }
     public static int win(){

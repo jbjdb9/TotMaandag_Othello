@@ -55,13 +55,13 @@ public class OthelloBoard {
         System.out.println("- ⚫Black: " + OthelloReferee.scoreboard(1)+" | ⚪White: " + OthelloReferee.scoreboard(2)+" -");
         System.out.println();
     }
-    public static void update(int[] move) {
-        if (OthelloGame.turn == 1) {
+    public static void update(int[] move, int[][] board, int turn) {
+        if (turn == 1) {
             board[move[0]][move[1]] = OthelloGame.playerOne[1];
-            OthelloCalculator.flipper(move, OthelloGame.playerOne[1]);
+            OthelloCalculator.flipper(move, OthelloGame.playerOne[1], board);
         } else {
             board[move[0]][move[1]] = OthelloGame.playerTwo[1];
-            OthelloCalculator.flipper(move, OthelloGame.playerTwo[1]);
+            OthelloCalculator.flipper(move, OthelloGame.playerTwo[1], board);
         }
     }
 }

@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.util.Random;
 
 public class OthelloGame {
-    static int[] move = {0,0};
+    static int[] move = {0, 0};
     // player int list exists of: {player type, player colour, player stones}
     static int[] playerOne = {0, 0, 2, 30};
     static int[] playerTwo = {0, 0, 2, 30};
@@ -11,16 +11,18 @@ public class OthelloGame {
 
     static public void loop() throws IOException {
         // Set the turn
-        //Random rng = new Random();
-        //turn = rng.nextInt(1, 3);
+        if (!Play.remote) {
+            Random rng = new Random();
+            turn = rng.nextInt(1, 3);
+        }
         // Print the board
 
         // Set colour based on which player starts
-        if (turn == 1){
+        if (turn == 1) {
             playerOne[1] = 1;
             playerTwo[1] = 2;
             System.out.println("Player One is Black. Player Two is White");
-        } else{
+        } else {
             playerOne[1] = 2;
             playerTwo[1] = 1;
             System.out.println("Player One is White. Player Two is Black");
@@ -46,9 +48,9 @@ public class OthelloGame {
                     case 2 -> move = Remote.move();
                 }
             }
-            OthelloBoard.update(move);
+            OthelloBoard.update(move, OthelloBoard.board, turn);
             // End the game if no more moves are possible
-            if (!OthelloReferee.possibleMove()){
+            if (!OthelloReferee.possibleMove()) {
                 gameWin = true;
                 int winner = OthelloReferee.win();
                 Announcer.winner(winner);
@@ -57,13 +59,16 @@ public class OthelloGame {
                     break;
                 }
             }
-
             // Move the turn to the next player
-            if (turn == 2) {
-                turn = 1;
-            } else if (turn == 1) {
-                turn = 2;
-            }
+            turnSwitch();
+        }
+    }
+
+    public static void turnSwitch() {
+        if (turn == 2) {
+            turn = 1;
+        } else if (turn == 1) {
+            turn = 2;
         }
     }
 }
