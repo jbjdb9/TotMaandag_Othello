@@ -35,17 +35,13 @@ public class Remote {
             if (response.contains("{")) {
                 info = response.substring(response.indexOf("{"));
             }
-            System.out.println("remote move lijn : " + info);
+            System.out.println("remote move lijn 38 : " + info);
             if (!info.contains(Connect.username) && info.contains("move") && info.contains("details")) {
                 moved = true;
                 String[] arrOfstr = info.split("\"" , 5);
                 System.out.println(arrOfstr[3]);
                 move = Integer.parseInt(arrOfstr[3]);
-                //str.split op "MOVE"?
-                //zet lezen gaat hier niet goed.
-                //System.out.println(zet);
-                //move = (Integer.parseInt(info.substring(zet)));
-                //System.out.println(move);
+                System.out.println("u bent nu in de move lees functie, move = " + move);
             }
         }
         return move;
@@ -54,7 +50,9 @@ public class Remote {
     public static int[] translate() throws IOException {
         int [] move = {0, 0};
         int col = (move() / 8);
+        System.out.println("translate col = " + col);
         int row = (move() % 8);
+        System.out.println("translate row = " + row);
         move[1] = col;
         move[0] = row;
         return move;
@@ -94,9 +92,10 @@ public class Remote {
                 info = response.substring(response.indexOf("{"));
             }
             System.out.println("aimoved info = " + info);
-            if (info.contains("TURNMESSAGE: ")) {
-                out.println("move " + move);
+            if (info.contains("TURNMESSAGE")) {
                 ourMove = true;
+                System.out.println("u bent nu in de aimoved ifstatement");
+                out.println("move " + move);
                 // WAIT for the server to request a move (handleInGame)
                 // send the move our AI made to the server
             }
@@ -163,15 +162,13 @@ public class Remote {
             String info = "";
             if (response.contains("{")) {
                 info = response.substring(response.indexOf("{"));
-                System.out.println(info);
-                System.out.println("hoi");
-                System.out.println(responseParts[0]);
+//                System.out.println(info);
+//                System.out.println(responseParts[0]);
             }
             if (info.contains("TicTacToe")) {
                 inGame = true;
                 Play.game = 0;
                 matched = true;
-                System.out.println("hallo");
                 if (info.contains(Connect.username)) {
                     TcGame.turn = 1;
                 } else {
@@ -182,7 +179,6 @@ public class Remote {
                 inGame = true;
                 Play.game = 1;
                 matched = true;
-                System.out.println("hallo");
                 if (info.contains(Connect.username)) {
                     OthelloGame.turn = 1;
                 } else {
