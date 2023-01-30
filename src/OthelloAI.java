@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.util.Random;
+
 public class OthelloAI {
     static int[][] pointBoard = {{10, -5, 3, 3, 3, 3, -5, 10},
             {-5, -5, -2, -2, -2, -2, -5, -5},
@@ -40,6 +42,49 @@ public class OthelloAI {
             return minEval;
         }
     }
+    public static int alphaBeta(int[] position, int depth, int alpha, int beta, boolean maxiPlayer, int[][] board, int turn){
+        int[][] children = getPossibleMoves(board);
+        int[] pos = {0, 0};
+        if (depth == 0 || children.length == 0){
+            return pointBoard[position[0]][position[1]] + returnScore(position, board);
+        }
+        if (maxiPlayer){
+            int maxEval = Integer.MIN_VALUE;
+            for (int[] child : children) {
+                pos[0] = child[0];
+                pos[1] = child[1];
+                OthelloBoard.update(child, board, turn);
+                turn = turnSwitch(turn);
+                int eval = alphaBeta(pos, depth - 1, alpha, beta, false, board, turn);
+                maxEval = Math.max(eval, maxEval);
+                alpha = Math.max(alpha, eval);
+                if (beta <= alpha){
+                    break;
+                }
+            }
+            return maxEval;
+        }
+        else {
+            int minEval = Integer.MAX_VALUE;
+            for (int[] child : children) {
+                pos[0] = child[0];
+                pos[1] = child[1];
+                OthelloBoard.update(child, board, turn);
+                turn = turnSwitch(turn);
+                int eval = alphaBeta(pos, depth - 1, alpha, beta, true, board, turn);
+                minEval = Math.min(eval, minEval);
+                beta = Math.min(beta, eval);
+                if (beta <= alpha){
+                    break;
+                }
+            }
+            return minEval;
+        }
+    }
+    public static int randomAI(){
+        Random rng = new Random();
+        return rng.nextInt(1, 20);
+    }
     public static int turnSwitch(int turn) {
         if (turn == 2) {
             return 1;
@@ -61,7 +106,9 @@ public class OthelloAI {
             int[][] board = boardCopy();
 
             // Aanpassen voor checks! Minimax/AlphaBeta/Random
-            score = miniMax(position, 5, true, board, turn);
+            // score = miniMax(position, 63, true, board, turn);
+            score = alphaBeta(position, 63, Integer.MIN_VALUE , Integer.MAX_VALUE, true, board, turn);
+            // score = randomAI();
 
             if (score > bestScore) {
                 bestScore = score;
