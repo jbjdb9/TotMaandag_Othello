@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class GUI {
@@ -9,11 +10,27 @@ public class GUI {
 
     private JFrame Gamemode;
 
+    private JFrame TTTGame;
+
+    private JFrame OthelloGame;
+
     private JLabel cgame;
 
     private JButton S_TTT;
 
     private JButton S_Othello;
+
+    private JLabel S_Mode;
+
+    private JButton L_H_VS_H;
+
+    private JButton L_H_VS_AI;
+
+    private JButton L_AI_VS_AI;
+
+    private JButton Remote_AI;
+
+    private JButton OB_1;
 
 
     public GUI() {
@@ -21,11 +38,76 @@ public class GUI {
         cgame.setBounds(175, 200, 300, 50);
         cgame.setFont(new Font("Arial", Font.PLAIN, 20));
 
+        S_Mode = new JLabel("Selecteer speelmodus");
+        S_Mode.setBounds(200, 200, 300, 50);
+        S_Mode.setFont(new Font("Arial", Font.PLAIN, 20));
+
+        L_H_VS_H = new JButton("Local Human Vs Human");
+        L_H_VS_H.setBounds(150, 250, 150, 50);
+        L_H_VS_H.setFont(new Font("Arial", Font.PLAIN, 10));
+        L_H_VS_H.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Gamemode.setVisible(false);
+                if(Play.game == 0){
+                        System.out.println("yay");
+                }else {
+                    System.out.println("yay2");
+                }
+            }
+        });
+
+        L_H_VS_AI = new JButton("Local Human Vs AI");
+        L_H_VS_AI.setBounds(300, 250, 150, 50);
+        L_H_VS_AI.setFont(new Font("Arial", Font.PLAIN, 10));
+        L_H_VS_AI.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Gamemode.setVisible(false);
+                if(Play.game == 0){
+                    System.out.println("yay3");
+                }else {
+                    System.out.println("yay4");
+                }
+            }
+        });
+
+        L_AI_VS_AI = new JButton("Local AI Vs AI");
+        L_AI_VS_AI.setBounds(150, 300, 150, 50);
+        L_AI_VS_AI.setFont(new Font("Arial", Font.PLAIN, 10));
+        L_AI_VS_AI.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Gamemode.setVisible(false);
+                if(Play.game == 0){
+                    System.out.println("yay5");
+                }else {
+                    System.out.println("yay6");
+                }
+            }
+        });
+
+        Remote_AI = new JButton("Remote AI");
+        Remote_AI.setBounds(300, 300, 150, 50);
+        Remote_AI.setFont(new Font("Arial", Font.PLAIN, 10));
+        Remote_AI.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Gamemode.setVisible(false);
+                if(Play.game == 0){
+                    System.out.println("yay7");
+                }else {
+                    System.out.println("yay8");
+                }
+            }
+        });
+
         S_TTT = new JButton("Tic-Tac-Toe");
         S_TTT.setBounds(150, 250, 150, 50);
         S_TTT.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Play.game = 0;
                 Gameframe.setVisible(false);
                 Gamemode.setVisible(true);
             }
@@ -37,11 +119,13 @@ public class GUI {
         S_Othello.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Play.game = 1;
                 Gameframe.setVisible(false);
                 Gamemode.setVisible(true);
 
             }
         });
+
         Gameframe = new JFrame();
         Gameframe.setSize(600, 600);
         Gameframe.setLayout(null);
@@ -57,9 +141,44 @@ public class GUI {
         Gamemode.setSize(600, 600);
         Gamemode.setLayout(null);
         Gamemode.setVisible(false);
+        Gamemode.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Gamemode.setTitle("Selecteer modus");
+
+        Gamemode.add(S_Mode);
+        Gamemode.add(L_H_VS_H);
+        Gamemode.add(L_H_VS_AI);
+        Gamemode.add(L_AI_VS_AI);
+        Gamemode.add(Remote_AI);
+
+        OthelloGame = new JFrame();
+        OthelloGame.setSize(1200, 800);
+        OthelloGame.setLayout(null);
+        OthelloGame.setVisible(false);
+        OthelloGame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        OthelloGame.setTitle("Othello");
+
+        TTTGame = new JFrame();
+        TTTGame.setSize(1200, 800);
+        TTTGame.setLayout(null);
+        TTTGame.setVisible(false);
+        TTTGame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        TTTGame.setTitle("Tic-Tac-Toe");
+
     }
+
+    public static void Othellogame() {
+        for(int row = 0; row < 8; row++){
+            for(int col = 0; col < 8; col++){
+                int[] pos = {row, col};
+                String B_name = String.valueOf(OthelloAI.PositionTranslate((pos))) + (col + 1);
+                System.out.println(B_name);
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        System.out.println(new GUI());
+        Othellogame();
+        // System.out.println(new GUI());
     }
 }
 
