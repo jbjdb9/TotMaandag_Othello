@@ -2,8 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLOutput;
-import java.util.Scanner;
 
 public class GUI {
     private JFrame Gameframe;
@@ -11,8 +9,6 @@ public class GUI {
     private JFrame Gamemode;
 
     private JFrame TTTGame;
-
-    private JFrame OthelloGame;
 
     private JLabel cgame;
 
@@ -29,8 +25,6 @@ public class GUI {
     private JButton L_AI_VS_AI;
 
     private JButton Remote_AI;
-
-    private JButton OB_1;
 
 
     public GUI() {
@@ -150,13 +144,6 @@ public class GUI {
         Gamemode.add(L_AI_VS_AI);
         Gamemode.add(Remote_AI);
 
-        OthelloGame = new JFrame();
-        OthelloGame.setSize(1200, 800);
-        OthelloGame.setLayout(null);
-        OthelloGame.setVisible(false);
-        OthelloGame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        OthelloGame.setTitle("Othello");
-
         TTTGame = new JFrame();
         TTTGame.setSize(1200, 800);
         TTTGame.setLayout(null);
@@ -164,22 +151,12 @@ public class GUI {
         TTTGame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         TTTGame.setTitle("Tic-Tac-Toe");
 
-    }
 
-    public static void Othellogame() {
-        for(int row = 0; row < 8; row++){
-            for(int col = 0; col < 8; col++){
-                int[] pos = {row, col};
-                String B_name = OthelloAI.PositionTranslate(pos);
-                Button test_b = new Button(B_name);
-                System.out.println(test_b);
-            }
-        }
+
     }
 
     public static void main(String[] args) {
-        Othellogame();
-        // System.out.println(new GUI());
+        System.out.println(new GUI());
     }
 }
 
