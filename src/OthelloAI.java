@@ -99,7 +99,7 @@ public class OthelloAI {
 
             // Aanpassen voor checks!
             // score = miniMax(ints, 5, true, board, turn); // Max depth: 5
-            score = alphaBeta(ints, 9, Integer.MIN_VALUE , Integer.MAX_VALUE, true, board, turn); // Max depth 6
+            score = alphaBeta(ints, 9, Integer.MIN_VALUE , Integer.MAX_VALUE, true, board, turn); // Max depth 9
             // score = randomAI();
 
             if (score > bestScore) {
