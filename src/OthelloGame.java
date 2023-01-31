@@ -41,13 +41,13 @@ public class OthelloGame {
                     System.out.println("Player One is up!");
                     switch (playerOne[0]) {
                         case 0 -> move = Human.othelloMove();
-                        case 1 -> move = OthelloAI.move();
+                        case 1 -> move = OthelloAI.moveTimer();
                     }
                 } else {
                     System.out.println("Player Two is up!");
                     switch (playerTwo[0]) {
                         case 0 -> move = Human.othelloMove();
-                        case 1 -> move = OthelloAI.move();
+                        case 1 -> move = OthelloAI.moveTimer();
                         case 2 -> move = Remote.move();
                     }
                 }

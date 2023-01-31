@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class OthelloAI {
     static int[][] pointBoard = {{10, -5, 3, 3, 3, 3, -5, 10},
@@ -97,7 +99,7 @@ public class OthelloAI {
 
             // Aanpassen voor checks!
             // score = miniMax(ints, 5, true, board, turn); // Max depth: 5
-            score = alphaBeta(ints, 6, Integer.MIN_VALUE , Integer.MAX_VALUE, true, board, turn); // Max depth 6
+            score = alphaBeta(ints, 9, Integer.MIN_VALUE , Integer.MAX_VALUE, true, board, turn); // Max depth 6
             // score = randomAI();
 
             if (score > bestScore) {
@@ -105,6 +107,47 @@ public class OthelloAI {
                 bestPosition = ints;
             }
         }
+
+        System.out.println("De AI had als zet: " + PositionTranslate(bestPosition));
+        if (Play.remote) {
+            Remote.reverseTranslate(bestPosition);
+        }
+        return bestPosition;
+    }
+    public static int[] moveTimer() throws IOException {
+        int turn = OthelloGame.turn;
+        int score;
+        int bestScore = Integer.MIN_VALUE;
+        int[] bestPosition = {0, 0};
+        int[][] positions = OthelloBoard.getPossibleMoves(OthelloBoard.board, turn);
+        final boolean[] timeUp = {false};
+
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask(){
+            @Override
+            public void run() {
+                timeUp[0] = true;
+                System.out.println("Time is up!");
+            }
+        };
+
+        timer.schedule(task, 4000);
+
+        for (int[] ints : positions) {
+            int[][] board = boardCopy(OthelloBoard.board);
+
+            score = alphaBeta(ints, 10, Integer.MIN_VALUE , Integer.MAX_VALUE, true, board, turn); // Max depth 10
+
+            if (score > bestScore) {
+                bestScore = score;
+                bestPosition = ints;
+            }
+
+            if (timeUp[0]){
+                break;
+            }
+        }
+        timer.cancel();
 
         System.out.println("De AI had als zet: " + PositionTranslate(bestPosition));
         if (Play.remote) {
