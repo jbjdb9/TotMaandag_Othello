@@ -64,4 +64,31 @@ public class OthelloBoard {
             OthelloCalculator.flipper(move, OthelloGame.playerTwo[1], board);
         }
     }
+    public static int numberOfMoves(int[][] board) {
+        // Kijkt hoeveel zetten er mogelijk zijn
+        int count = 0;
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                if (OthelloReferee.validMove(new int[]{row, col}, board)) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    public static int[][] getPossibleMoves(int[][] board) {
+        int[][] moves = new int[numberOfMoves(board)][2];
+        int count = 0;
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                if (OthelloReferee.validMove(new int[]{row, col}, board)) {
+                    moves[count][1] = col; //Y-0
+                    moves[count][0] = row; //X-1
+                    count++;
+                }
+            }
+        }
+        return moves;
+    }
 }

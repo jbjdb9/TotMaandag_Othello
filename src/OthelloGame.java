@@ -34,18 +34,26 @@ public class OthelloGame {
             // Print the board
             OthelloBoard.print();
             // Correct player makes a move
-            if (turn == 1) {
-                System.out.println("Player One is up!");
-                switch (playerOne[0]) {
-                    case 0 -> move = Human.othelloMove();
-                    case 1 -> move = OthelloAI.move();
+            if (OthelloBoard.getPossibleMoves(OthelloBoard.board).length != 0){
+                if (turn == 1) {
+                    System.out.println("Player One is up!");
+                    switch (playerOne[0]) {
+                        case 0 -> move = Human.othelloMove();
+                        case 1 -> move = OthelloAI.move();
+                    }
+                } else {
+                    System.out.println("Player Two is up!");
+                    switch (playerTwo[0]) {
+                        case 0 -> move = Human.othelloMove();
+                        case 1 -> move = OthelloAI.move();
+                        case 2 -> move = Remote.move();
+                    }
                 }
             } else {
-                System.out.println("Player Two is up!");
-                switch (playerTwo[0]) {
-                    case 0 -> move = Human.othelloMove();
-                    case 1 -> move = OthelloAI.move();
-                    case 2 -> move = Remote.move();
+                if (turn == 1){
+                    System.out.println("Player One has no possible moves! Skipping turn!");
+                } else {
+                    System.out.println("Player Two has no possible moves! Skipping turn!");
                 }
             }
             OthelloBoard.update(move, OthelloBoard.board, turn);

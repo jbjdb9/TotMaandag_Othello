@@ -12,7 +12,7 @@ public class OthelloAI {
             {10, -5, 3, 3, 3, 3, -5, 10}};
 
     public static int miniMax(int[] position, int depth, boolean maxiPlayer, int[][] board, int turn){
-        int[][] children = getPossibleMoves(board);
+        int[][] children = OthelloBoard.getPossibleMoves(board);
         int[] pos = {0, 0};
         if (depth == 0 || children.length == 0){
             return pointBoard[position[0]][position[1]] + returnScore(position, board);
@@ -43,7 +43,7 @@ public class OthelloAI {
         }
     }
     public static int alphaBeta(int[] position, int depth, int alpha, int beta, boolean maxiPlayer, int[][] board, int turn){
-        int[][] children = getPossibleMoves(board);
+        int[][] children = OthelloBoard.getPossibleMoves(board);
         int[] pos = {0, 0};
         if (depth == 0 || children.length == 0){
             return pointBoard[position[0]][position[1]] + returnScore(position, board);
@@ -99,7 +99,7 @@ public class OthelloAI {
         int[] position = {0,0};
         int[] bestPosition = {0,0};
 
-        int[][] positions = getPossibleMoves(OthelloBoard.board);
+        int[][] positions = OthelloBoard.getPossibleMoves(OthelloBoard.board);
         for (int[] ints : positions) {
             position[0] = ints[0];
             position[1] = ints[1];
@@ -121,34 +121,6 @@ public class OthelloAI {
             Remote.reverseTranslate(bestPosition);
         }
         return bestPosition;
-    }
-
-    public static int numberOfMoves(int[][] board) {
-        // Kijkt hoeveel zetten er mogelijk zijn
-        int count = 0;
-        for (int row = 0; row < 8; row++) {
-            for (int col = 0; col < 8; col++) {
-                if (OthelloReferee.validMove(new int[]{row, col}, board)) {
-                    count++;
-                }
-            }
-        }
-        return count;
-    }
-
-    public static int[][] getPossibleMoves(int[][] board) {
-        int[][] moves = new int[numberOfMoves(board)][2];
-        int count = 0;
-        for (int row = 0; row < 8; row++) {
-            for (int col = 0; col < 8; col++) {
-                if (OthelloReferee.validMove(new int[]{row, col}, board)) {
-                    moves[count][1] = col; //Y-0
-                    moves[count][0] = row; //X-1
-                    count++;
-                }
-            }
-        }
-        return moves;
     }
 
     public static char PositionTranslate(int[] position) {
