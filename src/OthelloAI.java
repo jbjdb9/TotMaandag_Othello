@@ -104,39 +104,39 @@ public class OthelloAI {
             }
         }
 
-        System.out.println("De AI had als zet: " + PositionTranslate(bestPosition) + (bestPosition[0] + 1));
+        System.out.println("De AI had als zet: " + PositionTranslate(bestPosition));
         if (Play.remote) {
             Remote.reverseTranslate(bestPosition);
         }
         return bestPosition;
     }
 
-    public static char PositionTranslate(int[] position) {
+    public static String PositionTranslate(int[] position) {
         if (position[1] == 0) {
-            return 'A';
+            return "A" + (position[0] + 1);
         }
         if (position[1] == 1) {
-            return 'B';
+            return "B" + (position[0] + 1);
         }
         if (position[1] == 2) {
-            return 'C';
+            return "C" + (position[0] + 1);
         }
         if (position[1] == 3) {
-            return 'D';
+            return "D" + (position[0] + 1);
         }
         if (position[1] == 4) {
-            return 'E';
+            return "E" + (position[0] + 1);
         }
         if (position[1] == 5) {
-            return 'F';
+            return "F" + (position[0] + 1);
         }
         if (position[1] == 6) {
-            return 'G';
+            return "G" + (position[0] + 1);
         }
         if (position[1] == 7) {
-            return 'H';
+            return "H" + (position[0] + 1);
         }
-        return '?';
+        return "?";
     }
 
     public static int returnScore(int[] position, int[][] board){
