@@ -170,8 +170,9 @@ public class GUI {
         for(int row = 0; row < 8; row++){
             for(int col = 0; col < 8; col++){
                 int[] pos = {row, col};
-                String B_name = String.valueOf(OthelloAI.PositionTranslate((pos))) + (col + 1);
-                System.out.println(B_name);
+                String B_name = OthelloAI.PositionTranslate(pos);
+                Button test_b = new Button(B_name);
+                System.out.println(test_b);
             }
         }
     }
