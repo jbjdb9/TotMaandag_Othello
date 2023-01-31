@@ -1,5 +1,5 @@
 public class OthelloReferee {
-    public static boolean validMove(int[] move, int[][] board){
+    public static boolean validMove(int[] move, int[][] board, int turn){
         // move must be on the board
         if (move[0]<0 || move[0] > 7 || move[1]<0 || move[1] > 7){
             return false;
@@ -56,10 +56,10 @@ public class OthelloReferee {
                 }
             }
         }
-        if (OthelloGame.turn == 1) {
-            return OthelloCalculator.calculator(move, OthelloGame.playerOne[1], OthelloBoard.board);
+        if (turn == 1) {
+            return OthelloCalculator.calculator(move, OthelloGame.playerOne[1], board);
         } else {
-            return OthelloCalculator.calculator(move, OthelloGame.playerTwo[1], OthelloBoard.board);
+            return OthelloCalculator.calculator(move, OthelloGame.playerTwo[1], board);
         }
     }
     public static int win(){

@@ -34,7 +34,7 @@ public class OthelloGame {
             // Print the board
             OthelloBoard.print();
             // Correct player makes a move
-            if (OthelloBoard.getPossibleMoves(OthelloBoard.board).length != 0){
+            if (OthelloBoard.getPossibleMoves(OthelloBoard.board, turn).length != 0){
                 if (turn == 1) {
                     System.out.println("Player One is up!");
                     switch (playerOne[0]) {

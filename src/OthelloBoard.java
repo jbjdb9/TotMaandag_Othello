@@ -38,7 +38,7 @@ public class OthelloBoard {
                     }
                 }
                 else {
-                    if (OthelloReferee.validMove(new int[]{row, column}, OthelloBoard.board)){
+                    if (OthelloReferee.validMove(new int[]{row, column}, OthelloBoard.board, OthelloGame.turn)){
                         System.out.print("❎|");
                     }
                     else {
@@ -64,12 +64,12 @@ public class OthelloBoard {
             OthelloCalculator.flipper(move, OthelloGame.playerTwo[1], board);
         }
     }
-    public static int numberOfMoves(int[][] board) {
+    public static int numberOfMoves(int[][] board, int turn) {
         // Kijkt hoeveel zetten er mogelijk zijn
         int count = 0;
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                if (OthelloReferee.validMove(new int[]{row, col}, board)) {
+                if (OthelloReferee.validMove(new int[]{row, col}, board, turn)) {
                     count++;
                 }
             }
@@ -77,12 +77,12 @@ public class OthelloBoard {
         return count;
     }
 
-    public static int[][] getPossibleMoves(int[][] board) {
-        int[][] moves = new int[numberOfMoves(board)][2];
+    public static int[][] getPossibleMoves(int[][] board, int turn) {
+        int[][] moves = new int[numberOfMoves(board, turn)][2];
         int count = 0;
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                if (OthelloReferee.validMove(new int[]{row, col}, board)) {
+                if (OthelloReferee.validMove(new int[]{row, col}, board, turn)) {
                     moves[count][1] = col; //Y-0
                     moves[count][0] = row; //X-1
                     count++;

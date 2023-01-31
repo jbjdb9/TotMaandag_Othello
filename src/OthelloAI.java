@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Random;
 
 public class OthelloAI {
@@ -12,19 +13,17 @@ public class OthelloAI {
             {10, -5, 3, 3, 3, 3, -5, 10}};
 
     public static int miniMax(int[] position, int depth, boolean maxiPlayer, int[][] board, int turn){
-        int[][] children = OthelloBoard.getPossibleMoves(board);
-        int[] pos = {0, 0};
+        OthelloBoard.update(position, board, turn);
+        turn = turnSwitch(turn);
+        int[][] children = OthelloBoard.getPossibleMoves(board, turn);
         if (depth == 0 || children.length == 0){
             return pointBoard[position[0]][position[1]] + returnScore(position, board);
         }
         if (maxiPlayer){
             int maxEval = Integer.MIN_VALUE;
             for (int[] child : children) {
-                pos[0] = child[0];
-                pos[1] = child[1];
-                OthelloBoard.update(child, board, turn);
-                turn = turnSwitch(turn);
-                int eval = miniMax(pos, depth - 1, false, board, turn);
+                board = boardCopy(board);
+                int eval = miniMax(child, depth - 1, false, board, turn);
                 maxEval = Math.max(eval, maxEval);
             }
             return maxEval;
@@ -32,30 +31,25 @@ public class OthelloAI {
         else {
             int minEval = Integer.MAX_VALUE;
             for (int[] child : children) {
-                pos[0] = child[0];
-                pos[1] = child[1];
-                OthelloBoard.update(child, board, turn);
-                turn = turnSwitch(turn);
-                int eval = miniMax(pos, depth - 1, true, board, turn);
+                board = boardCopy(board);
+                int eval = miniMax(child, depth - 1, true, board, turn);
                 minEval = Math.min(eval, minEval);
             }
             return minEval;
         }
     }
     public static int alphaBeta(int[] position, int depth, int alpha, int beta, boolean maxiPlayer, int[][] board, int turn){
-        int[][] children = OthelloBoard.getPossibleMoves(board);
-        int[] pos = {0, 0};
+        OthelloBoard.update(position, board, turn);
+        turn = turnSwitch(turn);
+        int[][] children = OthelloBoard.getPossibleMoves(board, turn);
         if (depth == 0 || children.length == 0){
             return pointBoard[position[0]][position[1]] + returnScore(position, board);
         }
         if (maxiPlayer){
             int maxEval = Integer.MIN_VALUE;
             for (int[] child : children) {
-                pos[0] = child[0];
-                pos[1] = child[1];
-                OthelloBoard.update(child, board, turn);
-                turn = turnSwitch(turn);
-                int eval = alphaBeta(pos, depth - 1, alpha, beta, false, board, turn);
+                board = boardCopy(board);
+                int eval = miniMax(child, depth - 1, false, board, turn);
                 maxEval = Math.max(eval, maxEval);
                 alpha = Math.max(alpha, eval);
                 if (beta <= alpha){
@@ -67,11 +61,8 @@ public class OthelloAI {
         else {
             int minEval = Integer.MAX_VALUE;
             for (int[] child : children) {
-                pos[0] = child[0];
-                pos[1] = child[1];
-                OthelloBoard.update(child, board, turn);
-                turn = turnSwitch(turn);
-                int eval = alphaBeta(pos, depth - 1, alpha, beta, true, board, turn);
+                board = boardCopy(board);
+                int eval = miniMax(child, depth - 1, true, board, turn);
                 minEval = Math.min(eval, minEval);
                 beta = Math.min(beta, eval);
                 if (beta <= alpha){
@@ -96,23 +87,20 @@ public class OthelloAI {
         int turn = OthelloGame.turn;
         int score;
         int bestScore = Integer.MIN_VALUE;
-        int[] position = {0,0};
         int[] bestPosition = {0,0};
 
-        int[][] positions = OthelloBoard.getPossibleMoves(OthelloBoard.board);
+        int[][] positions = OthelloBoard.getPossibleMoves(OthelloBoard.board, turn);
         for (int[] ints : positions) {
-            position[0] = ints[0];
-            position[1] = ints[1];
-            int[][] board = boardCopy();
+            int[][] board = boardCopy(OthelloBoard.board);
 
-            // Aanpassen voor checks! Minimax/AlphaBeta/Random
-            // score = miniMax(position, 63, true, board, turn);
-            score = alphaBeta(position, 63, Integer.MIN_VALUE , Integer.MAX_VALUE, true, board, turn);
+            // Aanpassen voor checks!
+            score = miniMax(ints, 8, true, board, turn);
+            // score = alphaBeta(ints, 63, Integer.MIN_VALUE , Integer.MAX_VALUE, true, board, turn);
             // score = randomAI();
 
             if (score > bestScore) {
                 bestScore = score;
-                bestPosition = position;
+                bestPosition = ints;
             }
         }
 
@@ -161,11 +149,44 @@ public class OthelloAI {
         return score;
     }
 
-    public static int[][] boardCopy(){
+    public static int[][] boardCopy(int[][] board){
         int[][] board_copy = new int[8][8];
         for (int row=0; row < 8; row++){
-            System.arraycopy(OthelloBoard.board[row], 0, board_copy[row], 0, 7);
+            System.arraycopy(board[row], 0, board_copy[row], 0, 7);
         }
         return board_copy;
+    }
+    public static void print(int[][] board){
+        // Code for an underline
+        System.out.print(" \u200E\u200E\u200E|\u200E\u200E\u200E\uD835\uDCD0 |\u200E\u200E\u200E\uD835\uDCD1 |\u200E\u200E\u200E\uD835\uDCD2 |\u200E\u200E\u200E\uD835\uDCD3 |\u200E\u200E\u200E\uD835\uDCD4 |\u200E\u200E\u200E\uD835\uDCD5 |\u200E\u200E\u200E\uD835\uDCD6 |\u200E\u200E\u200E\uD835\uDCD7 |");
+        // Print the board
+        for(int row = 0;row < 8;row++){
+            System.out.println();
+            System.out.print(row+1 + "|");
+            for(int column = 0;column < 8;column++){
+                if(board[row][column] != 0){
+                    if(board[row][column] == 1){
+                        System.out.print("⚫|");
+                    } else{
+                        System.out.print("⚪|");
+                    }
+                }
+                else {
+                    if (OthelloReferee.validMove(new int[]{row, column}, board, OthelloGame.turn)){
+                        System.out.print("❎|");
+                    }
+                    else {
+                        System.out.print("\uD83D\uDFE9|");
+                    }
+
+                }
+            }
+        }
+        //❎
+        // Code for an over line
+        System.out.println("\n ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
+        // Code for a scoreboard
+        System.out.println("- ⚫Black: " + OthelloReferee.scoreboard(1)+" | ⚪White: " + OthelloReferee.scoreboard(2)+" -");
+        System.out.println();
     }
 }
