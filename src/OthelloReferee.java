@@ -62,33 +62,18 @@ public class OthelloReferee {
             return OthelloCalculator.calculator(move, OthelloGame.playerTwo[1], board);
         }
     }
-    public static int win(){
+    public static void win(){
+        int score_black = scoreboard(1);
+        int score_white = scoreboard(2);
         // Check for a tie
-        if (OthelloGame.playerOne[2] == OthelloGame.playerTwo[2]){
-            return 3;
+        if (score_black == score_white){
+            System.out.println("It's a tie!");
         }
-        else if (OthelloGame.playerOne[2] > OthelloGame.playerTwo[2]){
-            return 1;
+        else if (score_black > score_white){
+            System.out.println("Black Wins!");
         } else{
-            return 2;
+            System.out.println("White Wins!");
         }
-    }
-    public static boolean possibleMove() {
-        // No stones left to place
-        if (OthelloGame.playerOne[2] == 0 && OthelloGame.playerTwo[2] == 0){
-            return false; // No possible moves left
-        }
-        // Player two gives player one a stone
-        if (OthelloGame.playerOne[2] == 0 && OthelloGame.playerTwo[2] >= 0){
-            OthelloGame.playerOne[2] += 1;
-            OthelloGame.playerTwo[2] -= 1;
-        }
-        // Player one gives player two a stone
-        else if (OthelloGame.playerTwo[2] == 0 && OthelloGame.playerOne[2] >= 0){
-            OthelloGame.playerTwo[2] += 1;
-            OthelloGame.playerOne[2] -= 1;
-        }
-        return true; // return true whether stones have been given to the opponent or not
     }
     public static int scoreboard(int color){
         int score = 0;

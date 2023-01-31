@@ -8,6 +8,7 @@ public class OthelloGame {
     static int[] playerTwo = {0, 0, 2, 30};
     static int turn;
     static boolean gameWin;
+    static boolean possibleMove = true;
 
     static public void loop() throws IOException {
         // Set the turn
@@ -35,6 +36,7 @@ public class OthelloGame {
             OthelloBoard.print();
             // Correct player makes a move
             if (OthelloBoard.getPossibleMoves(OthelloBoard.board, turn).length != 0){
+                possibleMove = true;
                 if (turn == 1) {
                     System.out.println("Player One is up!");
                     switch (playerOne[0]) {
@@ -49,24 +51,19 @@ public class OthelloGame {
                         case 2 -> move = Remote.move();
                     }
                 }
-            } else {
+            } else if (possibleMove){
+                possibleMove = false;
                 if (turn == 1){
                     System.out.println("Player One has no possible moves! Skipping turn!");
                 } else {
                     System.out.println("Player Two has no possible moves! Skipping turn!");
                 }
+            } else { // End the game if no one can make a turn
+                OthelloReferee.win();
+                break;
             }
             OthelloBoard.update(move, OthelloBoard.board, turn);
-            // End the game if no more moves are possible
-            if (!OthelloReferee.possibleMove()) {
-                gameWin = true;
-                int winner = OthelloReferee.win();
-                Announcer.winner(winner);
-                Remote.inGame = false;
-                if (!Play.remote) {
-                    break;
-                }
-            }
+
             // Move the turn to the next player
             turnSwitch();
         }
