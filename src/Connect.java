@@ -6,11 +6,11 @@ import java.net.Socket;
 
 public class Connect {
     public static Socket connection;
-    public static String username = "TotMaandag1";
+    public static String username = "TotMaandag";
     public static boolean connected = false;
     public static boolean connect() throws IOException {
         try {
-            connection = new Socket("localhost", 7789);
+            connection = new Socket("145.33.225.170", 7789);
         } catch (IOException e) {
             System.out.println("Something went wrong.");
             return false;
@@ -36,6 +36,5 @@ public class Connect {
             }
             connected = true;
             return true;
-
         }
     }
