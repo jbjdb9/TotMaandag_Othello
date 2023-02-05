@@ -9,8 +9,10 @@ public class TcGame {
 
     static public void loop() throws IOException {
         // Set the turn
-        //Random rng = new Random();
-        //turn = rng.nextInt(1, 3);
+        if (!Play.remote) {
+            Random rng = new Random();
+            turn = rng.nextInt(1, 3);
+        }
         // Print the board
         TcBoard.print();
         // Welcome the players, notify them who starts and who is playing as what.
