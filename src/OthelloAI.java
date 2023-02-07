@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class OthelloAI {
+
     static int[][] pointBoard = {{10, -5, 3, 3, 3, 3, -5, 10},
             {-5, -5, -2, -2, -2, -2, -5, -5},
             {3, -2, 0, 0, 0, 0, -2, 3},
@@ -87,7 +88,8 @@ public class OthelloAI {
     }
 
     public static int[] move() throws IOException {
-        int turn = OthelloGame.turn;
+        //int turn = OthelloGame.turn;
+        int turn = OthelloGui_PVP.turn;
         int score;
         int bestScore = Integer.MIN_VALUE;
         int[] bestPosition = {0, 0};

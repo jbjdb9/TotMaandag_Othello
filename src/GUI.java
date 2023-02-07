@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class GUI {
     private JFrame Gameframe;
@@ -26,6 +27,8 @@ public class GUI {
 
     private JButton Remote_AI;
 
+    static int GM_selected;
+
 
     public GUI() {
         cgame = new JLabel("Welke game wil je spelen?");
@@ -43,10 +46,17 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Gamemode.setVisible(false);
+                GM_selected = 1;
                 if(Play.game == 0){
                         System.out.println("yay");
                 }else {
-                    new OthelloGui_PVP();
+                    try {
+                        new OthelloGui_PVP();
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
         });
@@ -58,10 +68,17 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Gamemode.setVisible(false);
+                GM_selected = 2;
                 if(Play.game == 0){
                     System.out.println("yay3");
                 }else {
-                    System.out.println("yay4");
+                    try {
+                        new OthelloGui_PVP();
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
         });
@@ -73,10 +90,17 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Gamemode.setVisible(false);
+                GM_selected = 3;
                 if(Play.game == 0){
                     System.out.println("yay5");
                 }else {
-                    System.out.println("yay6");
+                    try {
+                        new OthelloGui_PVP();
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
         });
@@ -88,10 +112,17 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Gamemode.setVisible(false);
+                GM_selected = 4;
                 if(Play.game == 0){
                     System.out.println("yay7");
                 }else {
-                    System.out.println("yay8");
+                    try {
+                        new OthelloGui_PVP();
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
         });
