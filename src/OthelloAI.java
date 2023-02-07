@@ -107,7 +107,7 @@ public class OthelloAI {
             }
         }
 
-        System.out.println("De AI had als zet: " + PositionTranslate(bestPosition));
+        System.out.println("De AI had als zet: " + PositionTranslate_inta_str(bestPosition));
         if (Play.remote) {
             Remote.reverseTranslate(bestPosition);
         }
@@ -155,7 +155,7 @@ public class OthelloAI {
         return bestPosition;
     }
 
-    public static String PositionTranslate(int[] position) {
+    public static String PositionTranslate_inta_str(int[] position) {
         if (position[1] == 0) {
             return "A" + (position[0] + 1);
         }
@@ -181,6 +181,35 @@ public class OthelloAI {
             return "H" + (position[0] + 1);
         }
         return "?";
+    }
+    public static int[] PositionTranslate_str_inta(String position){
+        if (position.charAt(0) == 'A'){
+            return new int[]{position.charAt(1)-49, 0};
+        }
+        if (position.charAt(0) == 'B'){
+            return new int[]{position.charAt(1)-49, 1};
+        }
+        if (position.charAt(0) == 'C'){
+            return new int[]{position.charAt(1)-49, 2};
+        }
+        if (position.charAt(0) == 'D'){
+            return new int[]{position.charAt(1)-49, 3};
+        }
+        if (position.charAt(0) == 'E'){
+            return new int[]{position.charAt(1)-49, 4};
+        }
+        if (position.charAt(0) == 'F'){
+            return new int[]{position.charAt(1)-49, 5};
+        }
+        if (position.charAt(0) == 'G'){
+            return new int[]{position.charAt(1)-49, 6};
+        }
+        if (position.charAt(0) == 'H'){
+            return new int[]{position.charAt(1)-49, 7};
+        }
+        else {
+            return new int[]{0,0};
+        }
     }
 
     public static int returnScore(int[] position, int[][] board) {
