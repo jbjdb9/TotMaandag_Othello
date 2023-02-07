@@ -2,15 +2,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.border.Border;
 
-public class OthelloGui implements ActionListener {
+public class OthelloGui_PVE implements ActionListener {
     private JFrame OthelloGame;
     static Button[][] button_list = new Button[8][8];
     static int turn = 2;
 
     static int[] move;
-    //static JLabel score = new JLabel();
+    private static JLabel score_w = new JLabel();
+    private static JLabel score_b = new JLabel();
     @Override
     public void actionPerformed (ActionEvent e){
         String action_button = e.getActionCommand();
@@ -18,9 +18,10 @@ public class OthelloGui implements ActionListener {
         int[] position = OthelloAI.PositionTranslate_str_inta(action_button);
         OthelloBoard.update(position, OthelloBoard.board, turn);
         Othelloboardupdater();
-
     }
-    public OthelloGui() {
+
+
+    public OthelloGui_PVE() {
         OthelloGame = new JFrame();
         OthelloGame.setSize(1200, 835);
         OthelloGame.setLayout(null);
@@ -31,32 +32,39 @@ public class OthelloGui implements ActionListener {
     }
 
     public void Othelloboardmaker(){
+        if (OthelloBoard.getPossibleMoves(OthelloBoard.board, 2).length ==0 && OthelloBoard.getPossibleMoves(OthelloBoard.board, 1).length == 0) {
+            System.out.println("Einde spel");
+            return;
+        }
+        if (OthelloBoard.getPossibleMoves(OthelloBoard.board, turn).length == 0){
+            turn = OthelloAI.turnSwitch(turn);
+        }
         int loc_per_button_x = 0;
         int loc_per_button_y = 0;
+
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
                 int[] pos = {row, col};
+
                 String button_name = OthelloAI.PositionTranslate_inta_str(pos);
                 Button button = new Button(button_name);
                 button_list[row][col] = button;
                 button.setBounds(loc_per_button_x, loc_per_button_y, 100, 100);
                 if (OthelloBoard.board[row][col]==1){
                     button.setBackground(Color.BLACK);
-                    //button.setLabel("⚫");
                 }
                 if (OthelloBoard.board[row][col]==2){
                     button.setBackground(Color.WHITE);
-                    //button.setLabel("⚪");
 
                 }
                 if (OthelloBoard.board[row][col]==0){
-                    button.setBackground(Color.GREEN);
-                    //button.setLabel("\uD83D\uDFE9");
+                    Color allbuttons =new Color(0, 89, 6);
+                    button.setBackground(allbuttons);
 
                 }
                 if (OthelloReferee.validMove(pos, OthelloBoard.board, turn)) {
-                    button.setBackground(Color.RED);
-                    //button.setLabel("❎");
+                    Color validmovecolor =new Color(0, 166, 11);
+                    button.setBackground(validmovecolor);
                     button.addActionListener(this);
                 }
 
@@ -66,6 +74,14 @@ public class OthelloGui implements ActionListener {
             loc_per_button_y += 100;
             loc_per_button_x = 0;
         }
+        score_b.setText("- ⚫Black: " + OthelloReferee.scoreboard(1));
+        score_b.setBounds(825, 50, 300, 100);
+        score_b.setFont(new Font("Arial", Font.PLAIN, 50));
+        OthelloGame.add(score_b);
+        score_w.setText("- ⚪White: " + OthelloReferee.scoreboard(2));
+        score_w.setBounds(825, 150, 300, 100);
+        score_w.setFont(new Font("Arial", Font.PLAIN, 50));
+        OthelloGame.add(score_w);
 
     }
 
@@ -80,9 +96,4 @@ public class OthelloGui implements ActionListener {
         // Makes the new board
         Othelloboardmaker();
     }
-
-    public static void main(String[] args) {
-        new OthelloGui();
-    }
 }
-

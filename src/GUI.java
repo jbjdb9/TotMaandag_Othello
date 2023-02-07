@@ -46,7 +46,7 @@ public class GUI {
                 if(Play.game == 0){
                         System.out.println("yay");
                 }else {
-                    System.out.println("yay2");
+                    new OthelloGui_PVP();
                 }
             }
         });

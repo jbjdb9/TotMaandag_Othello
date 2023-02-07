@@ -148,7 +148,7 @@ public class OthelloAI {
         }
         timer.cancel();
 
-        System.out.println("De AI had als zet: " + PositionTranslate(bestPosition));
+        System.out.println("De AI had als zet: " + PositionTranslate_inta_str(bestPosition));
         if (Play.remote) {
             Remote.reverseTranslate(bestPosition);
         }
